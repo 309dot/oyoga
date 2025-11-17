@@ -1310,9 +1310,10 @@
   grid-template-columns: 1fr 1fr;
   grid-auto-columns: 1fr;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   width: 50%;
-  height: 26vh;
+  height: 100%;
+  display: flex;
   text-decoration: none;
   overflow: clip;
 }
@@ -1474,6 +1475,7 @@
   padding: 1rem 2rem;
   text-decoration: none;
   display: flex;
+  position: relative;
 }
 
 .cantainer {
@@ -1788,6 +1790,21 @@
   position: static;
 }
 
+.navi_menu.w-dropdown {
+  position: relative;
+}
+
+/* 토글과 메뉴 사이의 공간을 호버 영역으로 만들기 */
+.navi_menu.w-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 1rem;
+  z-index: 1;
+}
+
 .navi_menu:hover {
   color: var(--text--base--primary);
   font-family: Pretendard, Arial, sans-serif;
@@ -1802,8 +1819,19 @@
   width: 100vw;
   max-width: 1440px;
   display: none;
-  position: absolute;
-  inset: 90% 0 auto;
+  position: fixed;
+  top: calc(1rem + 8px + 1rem + 8px + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* 호버 시 메뉴 표시 및 메뉴 위에 마우스가 있을 때도 유지 */
+.navi_menu.w-dropdown:hover .dropdown-list,
+.navi_menu.w-dropdown .dropdown-list:hover {
+  display: flex !important;
 }
 
 .dropdown-list.w--open {
@@ -1813,12 +1841,15 @@
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
-  max-width: 0;
+  max-width: 1440px;
   padding-left: 2rem;
   padding-right: 2rem;
   display: flex;
-  position: absolute;
-  inset: 90% 0% 0%;
+  position: fixed;
+  top: calc(1rem + 8px + 1rem + 8px + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
 }
 
 .icon {
@@ -3854,7 +3885,10 @@
 .image {
   box-sizing: border-box;
   object-fit: cover;
-  object-position: 50% 100%;
+  object-position: 50% 50%;
+  max-height: 200px;
+  width: 100%;
+  height: 100%;
 }
 
 .program-2 {
@@ -4303,6 +4337,15 @@
   object-fit: cover;
   border-radius: 16px;
   width: 100%;
+}
+
+/* Instagram Feed Widget Styles */
+a[title="Free Instagram Feed widget"] {
+  display: none !important;
+}
+
+.eapps-instagram-feed-posts-item-overlay {
+  border-radius: 16px;
 }
 
 .text-31 {
@@ -4861,6 +4904,7 @@
   grid-row-gap: 1rem;
   flex-flow: column;
   width: 100%;
+  margin-left: 26%;
   display: flex;
 }
 
@@ -5762,6 +5806,14 @@
 }
 
 @media screen and (max-width: 767px) {
+  .navi_menu.w-dropdown[data-hover="true"] {
+    pointer-events: auto;
+  }
+  
+  .navi_menu.w-dropdown[data-hover="true"]:hover .dropdown-list {
+    display: none;
+  }
+
   .logo {
     width: 80%;
   }
@@ -6174,6 +6226,7 @@
     align-items: flex-start;
     width: 100%;
     max-width: 100%;
+    margin-left: 0;
     padding-left: 2rem;
     display: flex;
   }
@@ -6871,6 +6924,7 @@
   .div-block-5 {
     grid-column-gap: .8rem;
     grid-row-gap: .8rem;
+    margin-left: 0;
     padding-left: 0;
   }
 
