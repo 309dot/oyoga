@@ -4054,8 +4054,8 @@
 }
 
 .container-41 {
-  flex-flow: column;
-  justify-content: flex-start;
+  flex-flow: row;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   max-width: 1440px;
@@ -4066,10 +4066,10 @@
 .img_horizontal {
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
-  flex-flow: column;
+  flex-flow: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50%;
   display: inline-flex;
 }
 
@@ -4093,16 +4093,14 @@
 }
 
 .img_program_container {
-  width: 100%;
-  padding-right: 0;
-  padding-bottom: 1.5rem;
+  width: 50%;
+  padding-right: 1.5rem;
 }
 
 .img_program_container-2 {
-  width: 100%;
-  padding-left: 0;
+  width: 50%;
+  padding-left: 1.5rem;
   padding-right: 0;
-  padding-top: 1.5rem;
 }
 
 .div-block-2 {
