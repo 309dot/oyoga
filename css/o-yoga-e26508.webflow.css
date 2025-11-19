@@ -544,6 +544,11 @@
   display: flex;
 }
 
+.logo img {
+  max-width: 48px;
+  max-height: 40px;
+}
+
 .button-2 {
   padding: var(--numbers--6) var(--numbers--10);
   grid-column-gap: var(--numbers--2);
@@ -1780,6 +1785,51 @@
   display: flex;
 }
 
+.dropdown-toggle img {
+  width: 20px;
+  height: 20px;
+}
+
+.btn_mobile .dropdown-toggle img {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.btn_mobile .dropdown-toggle [data-figma-id="20:6398"] img {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.btn_mobile .dropdown-toggle .icon.w-icon-dropdown-toggle {
+  display: none !important;
+}
+
+.btn_mobile .navi_menu.w-dropdown {
+  width: 52px;
+  padding: 0;
+}
+
+.btn_mobile .dropdown-toggle {
+  width: 100%;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn_mobile .dropdown-toggle > div {
+  padding: 0;
+  margin: 0;
+}
+
+.btn_mobile .dropdown-toggle [data-figma-id="20:6398"] {
+  padding: 0;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navi_menu {
   z-index: 2;
   justify-content: center;
@@ -1820,7 +1870,7 @@
   max-width: 1440px;
   display: none;
   position: fixed;
-  top: calc(1rem + 8px + 1rem + 8px + 1.5rem);
+  top: calc(1rem + 8px + 1rem + 8px + 2.4rem);
   left: 50%;
   transform: translateX(-50%);
   right: auto;
@@ -1844,18 +1894,29 @@
   max-width: 1440px;
   padding-left: 2rem;
   padding-right: 2rem;
-  display: flex;
   position: fixed;
-  top: calc(1rem + 8px + 1rem + 8px + 1.5rem);
+  top: calc(1rem + 8px + 1rem + 8px + 2.4rem);
   left: 50%;
   transform: translateX(-50%);
   right: auto;
+}
+
+/* 데스크톱에서는 호버만 사용, 클릭 기능 제거 */
+@media screen and (min-width: 992px) {
+  .dropdown-list.w--open {
+    display: none !important;
+  }
+  
+  .w-dropdown-toggle.w--open {
+    pointer-events: none;
+  }
 }
 
 .icon {
   margin-right: 0;
   display: none;
   position: relative;
+  width: 20px;
 }
 
 .img_thum2 {
@@ -3288,7 +3349,7 @@
 .container-21 {
   grid-column-gap: 40px;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
   max-width: 1440px;
   text-decoration: none;
@@ -3320,6 +3381,7 @@
   height: 640px;
   text-decoration: none;
   display: flex;
+  flex: 1 1 0;
 }
 
 .img_program01-2 {
@@ -3446,15 +3508,19 @@
 }
 
 .section-15 {
+  grid-column-gap: 40px;
   grid-row-gap: 32px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
+  max-width: 1440px;
   padding: 0 2rem 5rem;
   text-decoration: none;
   display: flex;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .splide {
@@ -3472,8 +3538,10 @@
 .splide.slider2.tall {
   grid-column-gap: 2.5rem;
   grid-row-gap: 2.5rem;
+  flex: 1 1 0;
   position: relative;
   overflow: visible;
+  min-width: 0;
 }
 
 .container-26 {
@@ -3482,10 +3550,49 @@
   justify-content: flex-start;
   padding-top: 48px;
   align-items: flex-start;
-  width: 100%;
-  max-width: 480px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
   text-decoration: none;
-  display: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.team-list-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.team-list-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 672px;
+}
+
+.img_thum_team_list {
+  width: 160px;
+  height: 160px;
+  border-radius: 1rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.img_thum_team_list .image-6 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-list-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .text-19 {
@@ -3494,6 +3601,18 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
+  font-size: 1.875rem;
+  font-weight: 400;
+  line-height: 2.25rem;
+}
+
+.container-26 .text-19 {
+  font-size: 1.875rem;
+  font-weight: 400;
+  line-height: 2.25rem;
+}
+
+.team-list-content .text-19 {
   font-size: 1.875rem;
   font-weight: 400;
   line-height: 2.25rem;
@@ -3867,6 +3986,7 @@
   width: 100%;
   min-width: 10vw;
   max-width: 1440%;
+  height: 640px;
   overflow: clip;
 }
 
@@ -4371,7 +4491,7 @@ a[title="Free Instagram Feed widget"] {
 .container-46 {
   grid-column-gap: 40px;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
   max-width: 1440px;
   text-decoration: none;
@@ -4379,7 +4499,7 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .img-style {
-  flex: 1 1 0;
+  flex: 0 auto;
   justify-content: center;
   align-items: center;
   text-decoration: none;
@@ -4389,10 +4509,15 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .img_program01-6 {
+  box-sizing: border-box;
   object-fit: cover;
   border-radius: 16px;
+  flex: 0 auto;
   width: 100%;
+  min-width: 10vw;
+  max-width: 1440%;
   height: 640px;
+  overflow: clip;
 }
 
 .logo-2 {
@@ -4413,40 +4538,17 @@ a[title="Free Instagram Feed widget"] {
   object-fit: cover;
 }
 
-.container-47-caption {
-  flex: 1 1 0;
-  flex-direction: column;
+.container-47 {
+  grid-column-gap: 40px;
+  grid-row-gap: 8px;
+  flex-flow: row;
   justify-content: flex-end;
   align-items: flex-start;
-  max-width: 480px;
-  min-width: 0;
+  width: 100%;
   height: 640px;
   text-decoration: none;
   display: flex;
-}
-
-.container-47-caption .caption {
-  margin-top: auto;
-}
-
-.container-47-text {
   flex: 1 1 0;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  min-width: 0;
-  max-height: 640px;
-  text-decoration: none;
-  display: flex;
-  overflow: hidden;
-}
-
-.container-47-text .text-17 {
-  width: 100%;
-  max-height: 640px;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  overflow: hidden;
 }
 
 .body-style {
@@ -4801,23 +4903,45 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .container_event {
+  background-color: #90a098;
+  border-radius: 0.75rem;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  padding: 1.5rem 0 1.5rem 2rem;
+  padding: 1.5rem;
   display: flex;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.image-wrapper-event {
+  width: 160px;
+  height: 271px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.image-wrapper-event .image-4 {
+  position: absolute;
+  bottom: 0;
+  left: -23px;
+  width: 162px;
+  height: 271px;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .text_event {
-  color: var(--text--base--inverted);
+  color: rgba(255, 255, 255, 0.6);
   text-align: left;
   white-space: break-spaces;
   word-break: keep-all;
-  flex: 1;
   font-family: Pretendard, Arial, sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.2rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.2px;
 }
 
 .link_naver_book {
@@ -4844,15 +4968,18 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .btn_close {
-  color: #fff;
+  background-color: transparent;
+  border-radius: 0.5rem;
   cursor: pointer;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  padding-left: 1rem;
-  padding-right: .25rem;
+  padding: 0.25rem 0.5rem;
   display: flex;
-  position: relative;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  border: none;
 }
 
 .btn_close:hover {
@@ -4864,71 +4991,99 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .text-block-4 {
-  color: var(--text--base--secondary);
+  color: rgba(15, 19, 36, 0.6);
   font-family: Pretendard, Arial, sans-serif;
-  font-size: .8rem;
-  line-height: 1.2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0px;
 }
 
 .navi_event_mobile {
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  background-color: #90a098;
-  border-radius: 24px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
+  background-color: transparent;
+  border-radius: 0;
   justify-content: flex-start;
-  align-items: center;
-  width: 40vw;
-  margin-bottom: 2rem;
-  margin-left: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  align-items: flex-start;
+  width: auto;
+  max-width: 25rem;
+  padding: 0;
   display: flex;
   position: fixed;
-  inset: auto 0% 0%;
+  bottom: 0;
+  left: 2rem;
+  z-index: 1000;
 }
 
 .image-4 {
-  z-index: -10;
-  width: 24%;
-  max-width: none;
-  margin-bottom: 1rem;
-  position: absolute;
-  inset: auto auto 0% 0%;
+  width: 10rem;
+  height: auto;
+  flex-shrink: 0;
+  position: relative;
+  object-fit: cover;
 }
 
 .div-block-5 {
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
   flex-flow: column;
-  width: 100%;
-  margin-left: 26%;
+  flex: 1;
+  min-width: 0;
   display: flex;
+  gap: 1.25rem;
+  width: 100%;
+  min-height: 0;
+}
+
+.div-block-7 {
+  flex-flow: column;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.div-block-6 {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .title_text_event {
-  color: var(--text--base--inverted);
+  color: #ffffff;
   text-align: left;
-  flex: 1;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: -0.3px;
+  width: 100%;
+  margin: 0;
 }
 
 .event_btn {
-  padding: var(--numbers--6) var(--numbers--10);
-  grid-column-gap: var(--numbers--2);
-  border-radius: var(--measurements--radius--lg);
-  background-color: var(--background--button--primary);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background-color: #14151a;
   flex: 0 auto;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   display: flex;
-  box-shadow: 0 1px 2px #14151a0d, inset 0 -1px 1px #0000001a;
+  gap: 0.25rem;
+  box-shadow: 0px 1px 2px 0px rgba(20, 21, 26, 0.05);
+  cursor: pointer;
+}
+
+.icon-arrow-right {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-arrow-right img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
 }
 
 .div-block-6 {
@@ -4936,10 +5091,9 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .div-block-7 {
-  grid-column-gap: .5rem;
-  grid-row-gap: .5rem;
   flex-flow: column;
   display: flex;
+  gap: 0.5rem;
 }
 
 .navi_event_mobile2 {
@@ -5018,20 +5172,16 @@ a[title="Free Instagram Feed widget"] {
 }
 
 .caption_carocel {
-  color: #0f132499;
+  color: rgba(15, 19, 36, 0.6);
   letter-spacing: -.2px;
   white-space: pre-line;
   word-break: keep-all;
-  justify-content: flex-start;
-  align-items: flex-end;
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
-  text-decoration: none;
-  display: flex;
 }
 
 .image-6 {
@@ -5066,14 +5216,15 @@ a[title="Free Instagram Feed widget"] {
 
 .label-3-copy {
   margin-top: 0;
-  margin-bottom: var(--typography--paragraph-spacing--caption-l);
-  font-family: var(--typography--family--pretendard);
-  color: var(--text--base--inverted);
-  font-size: var(--typography--size--caption-l);
-  line-height: var(--typography--line-height--caption-l);
-  text-align: center;
-  letter-spacing: var(--typography--letter-spacing--caption-l);
+  margin-bottom: 0;
+  font-family: Pretendard, Arial, sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
   font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.2px;
+  text-align: center;
+  white-space: nowrap;
   text-decoration: none;
 }
 
@@ -5165,6 +5316,11 @@ a[title="Free Instagram Feed widget"] {
   
   .navi_menu .text-block {
     white-space: nowrap;
+  }
+
+  .navi_menu.w-inline-block {
+    flex-shrink: 0;
+    min-width: fit-content;
   }
 
   .dropdown-list {
@@ -5260,6 +5416,24 @@ a[title="Free Instagram Feed widget"] {
 }
 
 @media screen and (max-width: 991px) {
+  .icon {
+    display: flex;
+    width: 20px;
+  }
+
+  .navi_menu.w-dropdown:hover .dropdown-list:not(.w--open),
+  .navi_menu.w-dropdown .dropdown-list:hover:not(.w--open) {
+    display: none !important;
+  }
+
+  .navi_menu.w-dropdown::after {
+    display: none;
+  }
+
+  .dropdown-list.w--open {
+    display: flex !important;
+  }
+
   .container-4 {
     grid-row-gap: 0px;
     flex-flow: column;
@@ -5304,6 +5478,18 @@ a[title="Free Instagram Feed widget"] {
     grid-column-gap: 0px;
     flex: 1;
     width: 100%;
+    min-width: 0;
+    justify-content: flex-start;
+  }
+
+  .center .navi_menu.w-inline-block {
+    flex-shrink: 0;
+    min-width: fit-content;
+  }
+
+  .center .navi_menu.w-inline-block .text-block {
+    flex-shrink: 0;
+    min-width: fit-content;
   }
 
   .right-3 {
@@ -5316,8 +5502,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .dropdown-toggle {
-    padding-left: 1rem;
-    padding-right: .5rem;
+    padding: 0;
   }
 
   .container-18 {
@@ -5755,10 +5940,9 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .container-47 {
-    grid-row-gap: 24px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 720px;
+    grid-row-gap: 40px;
+    flex-flow: column;
+    height: 100%;
   }
 
   .modal_event {
@@ -5781,14 +5965,19 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .navi_event_mobile {
-    width: 70vw;
-    padding-top: 1rem;
-    padding-left: 7.5rem;
-    padding-right: 1rem;
+    width: auto;
+    max-width: 25rem;
+    padding: 1.5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    gap: 1.5rem;
   }
 
   .image-4 {
-    max-width: 30%;
+    width: 10rem;
+    height: auto;
+    flex-shrink: 0;
   }
 
   .splide__slide.five-cards {
@@ -5810,8 +5999,17 @@ a[title="Free Instagram Feed widget"] {
     pointer-events: auto;
   }
   
-  .navi_menu.w-dropdown[data-hover="true"]:hover .dropdown-list {
+  .navi_menu.w-dropdown:hover .dropdown-list:not(.w--open),
+  .navi_menu.w-dropdown .dropdown-list:hover:not(.w--open) {
+    display: none !important;
+  }
+
+  .navi_menu.w-dropdown::after {
     display: none;
+  }
+
+  .dropdown-list.w--open {
+    display: flex !important;
   }
 
   .logo {
@@ -5869,14 +6067,14 @@ a[title="Free Instagram Feed widget"] {
   .dropdown-toggle {
     justify-content: center;
     align-items: center;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 0;
   }
 
   .icon {
     justify-content: center;
     align-items: center;
-    display: none;
+    display: flex;
+    width: 20px;
   }
 
   .navbar-brand-three {
@@ -6168,14 +6366,14 @@ a[title="Free Instagram Feed widget"] {
 
   .container_event {
     background-color: #90a098;
-    border: 1px solid #6e7e76;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     flex-flow: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 18vh;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin-bottom: 3rem;
-    padding: 1rem 1rem 1rem 0;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    position: relative;
   }
 
   .text_event {
@@ -6188,15 +6386,20 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .btn_close {
-    border: 1px solid var(--border--action--normal);
-    background-color: var(--background--button--secondary);
-    border-radius: 999px;
+    color: #fff;
+    cursor: pointer;
     justify-content: center;
     align-items: center;
-    width: auto;
-    padding: .25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.875rem;
+    display: flex;
     position: absolute;
-    inset: -2% 6% auto auto;
+    top: -1.5rem;
+    right: 1.5rem;
+    background-color: #14151a;
+    border-radius: 999px;
+    box-shadow: 0px 1px 2px 0px rgba(20, 21, 26, 0.05);
   }
 
   .text-block-4 {
@@ -6204,10 +6407,13 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .navi_event_mobile {
-    background-color: #0000;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    background-color: transparent;
+    padding: 0;
     display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 1rem;
+    max-width: 25rem;
   }
 
   .image-4 {
@@ -6567,6 +6773,23 @@ a[title="Free Instagram Feed widget"] {
 
   .section-15 {
     padding: 0 1rem 2rem;
+    flex-direction: column;
+    grid-column-gap: 0;
+    grid-row-gap: 2rem;
+  }
+  
+  .team-list-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .team-list-item {
+    max-width: 100%;
+  }
+  
+  .img_thum_team_list {
+    width: 120px;
+    height: 120px;
   }
 
   .splide {
@@ -6577,10 +6800,15 @@ a[title="Free Instagram Feed widget"] {
   .splide.slider2.tall {
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
+    flex: 1 1 auto;
+    width: 100%;
   }
 
   .container-26 {
-    padding-top: 40px;
+    padding-top: 0;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
   }
 
   .text-19 {
@@ -6771,19 +6999,9 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .img_program01-6 {
-    aspect-ratio: auto;
-    height: 100%;
-  }
-
-  .container-47-caption {
+    min-width: 0;
     max-width: 100%;
-    justify-content: flex-start;
-    height: auto;
-  }
-
-  .container-47-text {
-    max-width: 100%;
-    max-height: none;
+    height: 240px;
   }
 
   .container-47 {
@@ -6905,27 +7123,39 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .navi_event_mobile {
-    width: 100vw;
-    margin-bottom: 0;
-    margin-left: 0;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    width: auto;
+    max-width: 25rem;
+    padding: 0;
     display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 1rem;
+  }
+  
+  .container_event {
+    padding: 1rem;
+    gap: 1rem;
   }
 
   .image-4 {
-    z-index: 0;
-    width: 25vw;
-    margin-bottom: .1rem;
+    width: 8rem;
+    height: auto;
+    flex-shrink: 0;
     position: relative;
-    left: auto;
   }
 
   .div-block-5 {
-    grid-column-gap: .8rem;
-    grid-row-gap: .8rem;
-    margin-left: 0;
-    padding-left: 0;
+    flex-flow: column;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .div-block-7 {
+    flex-flow: column;
+    display: flex;
+    gap: 0.5rem;
   }
 
   .title_text_event {
