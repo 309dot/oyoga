@@ -6925,8 +6925,10 @@ a[title="Free Instagram Feed widget"] {
   }
   
   .team-list-wrapper {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
   }
   
   .team-list-item {
@@ -6955,6 +6957,7 @@ a[title="Free Instagram Feed widget"] {
     flex: 1 1 auto;
     width: 100%;
     max-width: 100%;
+    flex-direction: column;
   }
 
   .text-19 {

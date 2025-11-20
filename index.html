@@ -552,6 +552,24 @@
       }
     }
   });
+
+  // 배너 닫기 기능
+  document.addEventListener('DOMContentLoaded', function() {
+    const closeButtons = document.querySelectorAll('.btn_close');
+    const containerEvent = document.querySelector('.container_event');
+    const naviEventMobile = document.querySelector('.navi_event_mobile');
+    
+    closeButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        if (containerEvent) {
+          containerEvent.style.display = 'none';
+        }
+        if (naviEventMobile) {
+          naviEventMobile.style.display = 'none';
+        }
+      });
+    });
+  });
 </script>
   <script src="https://cdn.prod.website-files.com/679c71b2a9a2314e6b2dad74%2F65da374ca1ebd53e3cabb68c%2F67a9afd7907637fe4a45afed%2Fevents_calendar_embed_script-0.0.1.js" type="text/javascript"></script>
 </body>
