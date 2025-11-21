@@ -3328,9 +3328,9 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  line-height: 1.5rem;
+  line-height: 1.2rem;
   text-decoration: none;
   display: flex;
 }
@@ -3365,9 +3365,9 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 2.25rem;
+  font-size: 1.8rem;
   font-weight: 500;
-  line-height: 2.75rem;
+  line-height: 2.1rem;
   text-decoration: none;
 }
 
@@ -3601,9 +3601,9 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 1.875rem;
-  font-weight: 400;
-  line-height: 2.25rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 2.1rem;
 }
 
 .container-26 .text-19 {
@@ -3823,8 +3823,8 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  height: 480px;
-  min-height: 480px;
+  height: 30rem;
+  min-height: 30rem;
   padding: 32px;
   text-decoration: none;
   display: flex;
@@ -3925,8 +3925,8 @@
   align-items: flex-start;
   width: 100%;
   max-width: 676px;
-  height: 480px;
-  min-height: 480px;
+  height: 30rem;
+  min-height: 30rem;
   padding: 32px;
   text-decoration: none;
   display: flex;
@@ -4069,9 +4069,9 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  line-height: 1.5rem;
+  line-height: 1.2rem;
   text-decoration: none;
 }
 
@@ -4117,9 +4117,9 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 500;
-  line-height: 2.75rem;
+  line-height: 2.1rem;
   text-decoration: none;
   display: inline-flex;
 }
@@ -4156,7 +4156,7 @@
 }
 
 .container-39 {
-  grid-column-gap: 40px;
+  /*grid-column-gap: 40px;*/
   justify-content: flex-end;
   align-items: center;
   width: 100%;
@@ -4315,9 +4315,9 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 500;
-  line-height: 2.75rem;
+  line-height: 2.1rem;
   text-decoration: none;
   display: inline-flex;
 }
@@ -7022,8 +7022,8 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .container-32 {
-    height: 240px;
-    min-height: 240px;
+    height: 30rem;
+    min-height: 30rem;
     padding: 24px;
   }
 
@@ -7037,8 +7037,8 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .container-34 {
-    height: 240px;
-    min-height: 240px;
+    height: 30rem;
+    min-height: 30rem;
     padding: 24px;
   }
 
