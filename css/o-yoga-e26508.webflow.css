@@ -5933,6 +5933,13 @@ a[title="Free Instagram Feed widget"] {
     display: flex;
   }
 
+  .team-list-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
   .container-22 {
     grid-row-gap: 40px;
     flex-flow: column;
@@ -6108,6 +6115,13 @@ a[title="Free Instagram Feed widget"] {
     align-items: center;
     display: flex;
     width: 20px;
+  }
+
+  .team-list-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
   }
 
   .navbar-brand-three {
@@ -6925,8 +6939,8 @@ a[title="Free Instagram Feed widget"] {
   }
   
   .team-list-wrapper {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     width: 100%;
   }
