@@ -5233,9 +5233,9 @@ a[title="Free Instagram Feed widget"] {
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  line-height: 1.5rem;
+  line-height: 1.2rem;
 }
 
 .image-6 {
@@ -6621,8 +6621,8 @@ a[title="Free Instagram Feed widget"] {
 
   .div-block-6 {
     display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     box-sizing: border-box;
     padding: 0;
@@ -6946,6 +6946,8 @@ a[title="Free Instagram Feed widget"] {
   }
   
   .team-list-item {
+    flex-direction: column;
+    align-items: flex-start;
     max-width: 100%;
   }
   
