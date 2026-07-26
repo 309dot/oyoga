@@ -71,6 +71,7 @@
 }
 
 :root {
+  --scale: 1;
   --numbers--10: 10px;
   --numbers--12: 12px;
   --numbers--4: 4px;
@@ -126,7 +127,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -240,7 +241,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -869,7 +870,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -1031,7 +1032,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -1091,7 +1092,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -1242,8 +1243,8 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height:calc(100vh / var(--scale));
   padding: 3rem 2rem;
   text-decoration: none;
   display: flex;
@@ -1445,7 +1446,7 @@
   grid-column-gap: 32px;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 1rem 2rem;
   text-decoration: none;
   display: flex;
@@ -1527,7 +1528,7 @@
 .navbar {
   background-color: #ddd0;
   flex-flow: column;
-  width: 100vw;
+  width: 100%;
   display: flex;
   position: absolute;
   inset: 0% 0% auto;
@@ -1813,14 +1814,16 @@
   position: relative;
 }
 
-/* 토글과 메뉴 사이의 공간을 호버 영역으로 만들기 */
+/* 토글과 메뉴 사이의 공간을 호버 영역으로 만들기.
+   실측 간격이 22px이므로 2rem로 덮어 사각지대를 없앤다. 패널과 겹치는
+   부분은 패널 z-index가 더 높아 클릭에 영향 없음. */
 .navi_menu.w-dropdown::after {
   content: '';
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  height: 1rem;
+  height: 2rem;
   z-index: 1;
 }
 
@@ -1835,7 +1838,7 @@
   background-color: #ddd0;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   max-width: 1440px;
   display: none;
   position: fixed;
@@ -1859,7 +1862,7 @@
   flex: 0 auto;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   max-width: 1440px;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -2096,7 +2099,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 720px;
   padding-top: 8rem;
   padding-left: 2rem;
@@ -2136,7 +2139,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding-top: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -2182,7 +2185,7 @@
   word-break: keep-all;
   justify-content: flex-start;
   align-items: flex-end;
-  min-width: 25vw;
+  min-width:calc(25vw / var(--scale));
   height: 100%;
   margin-top: 0;
   margin-bottom: 0;
@@ -2199,7 +2202,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 3rem 2rem;
   text-decoration: none;
   display: flex;
@@ -2220,7 +2223,7 @@
   letter-spacing: -.7px;
   white-space: break-spaces;
   word-break: keep-all;
-  min-width: 30vw;
+  min-width:calc(30vw / var(--scale));
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
@@ -2258,7 +2261,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
 }
@@ -2267,7 +2270,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
 }
@@ -2501,7 +2504,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
 }
@@ -2510,7 +2513,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding-top: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -2566,7 +2569,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 3rem 2rem;
   text-decoration: none;
   display: flex;
@@ -2646,7 +2649,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 2.5rem 2rem;
   text-decoration: none;
   display: flex;
@@ -2843,7 +2846,7 @@
   border-radius: 16px;
   flex: 0 auto;
   width: 100%;
-  min-width: 10vw;
+  min-width:calc(10vw / var(--scale));
   max-width: 1440%;
   height: 640px;
   overflow: clip;
@@ -2873,7 +2876,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
 }
@@ -2971,7 +2974,7 @@
   letter-spacing: -.6px;
   white-space: break-spaces;
   word-break: keep-all;
-  width: 32vw;
+  width:calc(32vw / var(--scale));
   margin-top: 0;
   margin-bottom: 0;
   font-family: Pretendard, Arial, sans-serif;
@@ -2987,7 +2990,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  width: 28vw;
+  width:calc(28vw / var(--scale));
   max-width: 480px;
   height: 640px;
   text-decoration: none;
@@ -3080,7 +3083,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
 }
@@ -3157,7 +3160,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  width: 30vw;
+  width:calc(30vw / var(--scale));
   max-width: 480px;
   height: 640px;
   text-decoration: none;
@@ -3215,7 +3218,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   text-decoration: none;
   display: flex;
   position: relative;
@@ -3378,7 +3381,7 @@ a[title="Free Instagram Feed widget"] {
   border-radius: 16px;
   flex: 0 auto;
   width: 100%;
-  min-width: 10vw;
+  min-width:calc(10vw / var(--scale));
   max-width: 1440%;
   height: 640px;
   overflow: clip;
@@ -3534,8 +3537,8 @@ a[title="Free Instagram Feed widget"] {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height:calc(100vh / var(--scale));
   padding: 5rem 2rem 2rem;
   display: none;
   position: fixed;
@@ -3760,7 +3763,7 @@ a[title="Free Instagram Feed widget"] {
   background-color: #90a098;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding-left: 5rem;
   padding-right: 5rem;
   display: none;
@@ -4017,7 +4020,7 @@ a[title="Free Instagram Feed widget"] {
   background-color: #90a098;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding-left: 5rem;
   padding-right: 5rem;
   display: none;
@@ -4147,7 +4150,7 @@ a[title="Free Instagram Feed widget"] {
 
 @media screen and (min-width: 1920px) {
   .about, .program, .vectors-wrapper {
-    max-width: 100vw;
+    max-width: 100%;
   }
 
   .text-3 {
@@ -4159,7 +4162,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .container-5 {
-    max-width: 50vw;
+    max-width:calc(50vw / var(--scale));
   }
 
   .img_program01 {
@@ -4169,7 +4172,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .team {
-    max-width: 100vw;
+    max-width: 100%;
   }
 
   .img_team {
@@ -4177,21 +4180,21 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .footer {
-    max-width: 100vw;
+    max-width: 100%;
   }
 
   .main {
     background-position: 50% 100%;
     background-size: cover;
-    max-width: 100vw;
+    max-width: 100%;
   }
 
   .img {
-    height: 20vh;
+    height:calc(20vh / var(--scale));
   }
 
   .navigation-bar {
-    max-width: 100vw;
+    max-width: 100%;
   }
 
   .divider {
@@ -4270,7 +4273,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .text-17 {
-    min-width: 20vw;
+    min-width:calc(20vw / var(--scale));
   }
 
   .code-embed-2 {
@@ -4619,7 +4622,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .right-3 {
-    width: 80vw;
+    width:calc(80vw / var(--scale));
     display: flex;
   }
 
@@ -5107,7 +5110,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .section-9 {
-    width: 100vw;
+    width: 100%;
     padding: 2.5rem 1rem;
   }
 
@@ -5146,7 +5149,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .main {
-    height: 80vh;
+    height:calc(80vh / var(--scale));
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -5241,7 +5244,7 @@ a[title="Free Instagram Feed widget"] {
   }
 
   .main-2 {
-    height: 50vh;
+    height:calc(50vh / var(--scale));
     padding-top: 5.7rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -5695,4 +5698,15 @@ a[title="Free Instagram Feed widget"] {
   font-weight: 300;
   font-style: normal;
   font-display: swap;
+}
+
+/* ── 와이드 스크린 비율 확대 ──────────────────────────────────────────
+   디자인 기준폭 1440px. 그 이상에서는 레이아웃을 넓히는 대신 전체를
+   같은 비율로 확대해 디자인 비율을 그대로 유지한다.
+   vw/vh 값은 확대 후 재차 커지므로 --scale 로 나눠 보정한다. */
+@media screen and (min-width: 1441px) {
+  :root {
+    --scale: calc(100vw / 1440px);
+    zoom: var(--scale);
+  }
 }
