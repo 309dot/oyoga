@@ -1272,6 +1272,8 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  /* Contact·About 타일(.container-15/16)과 높이를 맞춘다 */
+  height: 200px;
   text-decoration: none;
   display: flex;
 }
@@ -1306,6 +1308,10 @@
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
   flex-flow: column;
+  /* 카드 높이를 꽉 채워야 space-between 이 텍스트와 버튼을 위아래로 벌린다 */
+  align-self: stretch;
+  flex: 1;
+  min-width: 0;
   justify-content: space-between;
   align-items: flex-start;
   padding-top: 1.2rem;
@@ -1339,6 +1345,12 @@
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.7rem;
+  /* 카드 높이가 200px 고정이라 제목이 길어지면 넘친다.
+     상시 교체되는 영역이므로 2줄로 잘라 레이아웃을 보호한다. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   text-decoration: none;
 }
 
@@ -5160,6 +5172,8 @@ a[title="Free Instagram Feed widget"] {
 
   .container-14 {
     flex-flow: column;
+    /* 모바일은 이미지가 숨겨지고 세로로 쌓이므로 높이 고정을 푼다 */
+    height: auto;
   }
 
   .img {
