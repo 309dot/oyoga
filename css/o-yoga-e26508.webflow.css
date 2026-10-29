@@ -5798,3 +5798,226 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
   }
 }
+
+/* ── 모션 · 인터랙션 ────────────────────────────────────────────────
+   js/interactions.js 와 짝. 아래 상태 클래스(.is-scrolled, .footer-in-view,
+   .reveal, .is-visible)는 JS 가 붙인다. JS 가 없으면 아무것도 붙지 않아
+   모든 콘텐츠가 기본 상태로 보인다. */
+:root {
+  --ease-out: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* 고정 내비게이션
+   주의: .navbar 는 이벤트 배너(position: fixed)를, .cantainer 는 데스크톱
+   드롭다운(position: fixed)을 품고 있다. 이 둘에 transform · filter ·
+   backdrop-filter 를 걸면 자식의 fixed 기준이 뷰포트에서 자신으로 바뀌어
+   배너와 드롭다운이 엉뚱한 곳에 뜬다. 유리 질감은 자손이 없는 ::before 에만 건다. */
+.navbar {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;          /* 알약 바깥의 투명한 띠가 아래 콘텐츠 클릭을 막지 않게 */
+}
+
+.navbar .cantainer,
+.navbar .navi_event_mobile {
+  pointer-events: auto;
+}
+
+.cantainer {
+  position: relative;
+  isolation: isolate;
+  transition: background-color .3s var(--ease-out), box-shadow .3s var(--ease-out);
+}
+
+.cantainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: rgba(255, 255, 255, .78);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  opacity: 0;
+  transition: opacity .3s var(--ease-out);
+}
+
+.is-scrolled .cantainer {
+  background-color: transparent;
+  box-shadow: 0 4px 12px #14151a14, 0 16px 32px #14151a1a;
+}
+
+.is-scrolled .cantainer::before {
+  opacity: 1;
+}
+
+/* 스크롤 리빌 */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* 이벤트 배너: 푸터가 보이면 비켜난다. 푸터 왼쪽의 주소를 가리지 않게.
+   Webflow 인터랙션(IX2)이 .navi_event_mobile 에 진입 애니메이션 뒤 인라인
+   opacity·transform 을 남겨 클래스 규칙을 이긴다. 그래서 모양은 인라인 스타일이
+   없는 안쪽 .container_event 에서 숨기고, 클릭 통과만 바깥에 건다.
+   .footer-in-view .navi_event_mobile 은 .navbar .navi_event_mobile 과 우선순위가
+   같으므로 반드시 그 뒤에 둔다. */
+.container_event {
+  transition: opacity .35s var(--ease-out), transform .35s var(--ease-out);
+}
+
+.footer-in-view .container_event {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.footer-in-view .navi_event_mobile {
+  pointer-events: none;
+}
+
+/* 버튼: 호버하면 살짝 떠오르고 누르면 들어간다 */
+.button,
+.button-2,
+.button-2_1,
+.button-3,
+.button-4,
+.button-5,
+.btn_area-2,
+.event_btn {
+  transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .button:hover,
+  .button-2:hover,
+  .button-2_1:hover,
+  .button-3:hover,
+  .button-4:hover,
+  .button-5:hover,
+  .btn_area-2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px #14151a1f, inset 0 -1px 1px #0000001a;
+  }
+
+  /* .event_btn 에는 원래 scale(0.8) 이 걸려 있다. 합성하지 않으면 호버 순간 100% 로 튄다 */
+  .event_btn:hover {
+    transform: scale(.8) translateY(-2px);
+  }
+}
+
+.button:active,
+.button-2:active,
+.button-2_1:active,
+.button-3:active,
+.button-4:active,
+.button-5:active,
+.btn_area-2:active {
+  transform: scale(.98);
+}
+
+.event_btn:active {
+  transform: scale(.78);
+}
+
+/* 뉴스 카드: 안쪽 '자세히 보기' 링크를 카드 전체로 넓히고 이미지를 살짝 확대 */
+.container-45 {
+  position: relative;
+}
+
+.container-45 > .button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* 이 버튼에 transform 이 걸리면 ::after 의 기준이 버튼으로 줄어들어
+   커서가 카드에서 벗어난 것으로 판정되고, 호버가 꺼졌다 켜졌다 반복한다 */
+.container-45 > .button:hover,
+.container-45 > .button:active {
+  transform: none;
+}
+
+.container-45 .image-2 {
+  transition: transform .7s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .container-45:hover .image-2 {
+    transform: scale(1.04);
+  }
+}
+
+/* Contact · About 타일 */
+.container-15,
+.container-16 {
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link-block-3:hover .container-15,
+  .link-block-4:hover .container-16 {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px #14151a2e;
+  }
+}
+
+/* 키보드로 이동할 때 현재 위치가 분명히 보이게 */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--text--base--primary);
+  outline-offset: 3px;
+}
+
+/* 같은 사이트 안에서 페이지를 옮길 때 교차 페이드 (지원 브라우저만, 나머지는 무시) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+/* 움직임 줄이기 설정 존중. JS 도 이 경우 .reveal 을 붙이지 않는다 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cantainer,
+  .cantainer::before,
+  .container_event,
+  .button,
+  .button-2,
+  .button-2_1,
+  .button-3,
+  .button-4,
+  .button-5,
+  .btn_area-2,
+  .event_btn,
+  .container-45 .image-2,
+  .container-15,
+  .container-16 {
+    transition: none;
+  }
+}
+
+/* ── 프로그램 행: 992~1440px 에서 글 칼럼이 짓눌리던 문제 ───────────
+   <img> 는 flex 안에서 min-width: auto 가 원래 너비(796px)로 계산돼 줄어들지
+   못한다. 넘치는 몫이 전부 글 칼럼으로 가서 1024px 에서는 72px 까지 좁아져
+   한 글자씩 세로로 쪼개졌다. 이미지가 줄어들 수 있게 하고, 높이는 글 칼럼
+   (360px)에 맞춰 잘라 채운다. 1440px 에서는 넘치는 몫이 없어 기존 디자인
+   (글 480 + 이미지 796)과 같다. 991px 이하는 세로로 쌓이므로 건드리지 않는다. */
+@media screen and (min-width: 992px) {
+  .img_program01 {
+    min-width: 0;
+    height: 360px;
+  }
+}
