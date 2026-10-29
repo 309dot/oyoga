@@ -6021,3 +6021,220 @@ button:focus-visible {
     height: 360px;
   }
 }
+
+/* ── 모바일 고정 CTA ────────────────────────────────────────────────
+   모바일에선 상담·예약 버튼이 햄버거 메뉴 안에 숨어 있다. 이벤트 배너와
+   겹치지 않게 배너를 닫은 뒤에만 뜬다. 표시 조건(배너 닫힘 · 히어로 지남 ·
+   페이지 끝 구역 아님)은 js/interactions.js 가 판정한다.
+   숨김 상태에서 키보드로 초점이 가지 않게 visibility 도 함께 끈다. */
+.sticky-cta {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    display: flex;
+    grid-column-gap: 8px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background-color: rgba(255, 255, 255, .88);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
+    border-top: 1px solid var(--border--base--alpha);
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: transform .3s var(--ease-out), visibility 0s linear .3s;
+  }
+
+  .show-sticky-cta .sticky-cta {
+    visibility: visible;
+    transform: none;
+    transition: transform .3s var(--ease-out), visibility 0s;
+  }
+
+  .sticky-cta-btn {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;                  /* 손가락 터치 최소 크기 */
+    border-radius: 12px;
+    font-family: Pretendard, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -.2px;
+    text-decoration: none;
+  }
+
+  .sticky-cta-btn.is-secondary {
+    color: var(--text--base--primary);
+    background-color: var(--background--surface--default);
+    border: 1px solid var(--border--action--normal);
+  }
+
+  .sticky-cta-btn.is-primary {
+    color: var(--text--base--inverted);
+    background-color: var(--background--button--primary);
+  }
+}
+
+/* ── FAQ ────────────────────────────────────────────────────────────
+   화면에 보이는 질문·답이 FAQPage 구조화 데이터의 원본이다(생성 스크립트가
+   이 마크업을 읽는다). 내용을 고치면 구조화 데이터도 다시 생성할 것.
+   섹션 제목은 기존 .text-29(한글 소제목)·.text-7(영문 대제목)과 같은 값. */
+.faq {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 80px 32px 96px;
+  background-color: var(--background--surface--default);
+}
+
+.faq-inner {
+  display: flex;
+  grid-column-gap: 48px;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.faq-head {
+  flex: 0 0 320px;
+}
+
+.faq-eyebrow {
+  margin: 0 0 8px;
+  color: var(--text--base--secondary);
+  font-family: Pretendard, sans-serif;
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: -.2px;
+}
+
+.faq-title {
+  color: var(--text--base--primary);
+  font-family: Pretendard, Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 3.5rem;
+  letter-spacing: -1px;
+}
+
+.faq-list {
+  flex: 1;
+  min-width: 0;
+  border-top: 1px solid var(--border--action--normal);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border--action--normal);
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column-gap: 24px;
+  padding: 24px 0;
+  color: var(--text--base--primary);
+  font-family: Pretendard, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -.3px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-q::after {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .3s var(--ease-out), margin-top .3s var(--ease-out);
+}
+
+.faq-item[open] .faq-q::after {
+  margin-top: 6px;
+  transform: rotate(-135deg);
+}
+
+.faq-a {
+  padding: 0 0 24px;
+  color: var(--text--base--secondary);
+  font-family: Pretendard, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: -.2px;
+}
+
+.faq-item[open] .faq-a {
+  animation: faq-in .35s var(--ease-out);
+}
+
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.faq-a p {
+  margin: 0;
+}
+
+.faq-a a {
+  color: var(--text--base--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media screen and (max-width: 991px) {
+  .faq-inner {
+    flex-direction: column;
+    grid-row-gap: 32px;
+  }
+
+  .faq-head {
+    flex: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .faq {
+    padding: 56px 16px 64px;
+  }
+
+  .faq-title {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .faq-q {
+    padding: 20px 0;
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta,
+  .show-sticky-cta .sticky-cta,
+  .faq-q::after {
+    transition: none;
+  }
+
+  .faq-item[open] .faq-a {
+    animation: none;
+  }
+}
