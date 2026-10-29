@@ -5755,3 +5755,46 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   border: 0;
 }
+
+/* ── 푸터 연락처 (NAP) ─────────────────────────────────────────────
+   주소·전화가 사이트 어디에도 없어 방문 경로가 막혀 있었다.
+   네이버 예약 등록 주소와 동일하게 표기한다(로컬 검색 NAP 일관성). */
+.footer-info {
+  flex-direction: column;
+  align-items: flex-start;
+  grid-row-gap: 8px;
+}
+
+.footer-nap {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column-gap: 16px;
+  grid-row-gap: 4px;
+  color: var(--text--base--secondary);
+  font-family: Pretendard, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: -.1px;
+}
+
+.footer-nap-name {
+  color: var(--text--base--primary);
+  font-weight: 600;
+}
+
+.footer-nap a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-nap a:hover {
+  color: var(--text--base--primary);
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 767px) {
+  .footer-nap {
+    flex-direction: column;
+  }
+}
