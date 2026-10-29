@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# 내용이 비어 있는 Webflow CMS 템플릿 — 색인 제외
+Disallow: /detail_programs.html
+Disallow: /detail_team-profile.html
+
+# 생성형 검색엔진 크롤러 허용 (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.oyoga.kr/sitemap.xml
