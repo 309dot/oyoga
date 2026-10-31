@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>지도자 과정 — 시안 E · 오요가</title>
+<meta name="description" content="오요가 아카데미 RYT200 지도자 과정. 2026 하반기 제주 리트릿 TTC와 서울 주말 과정.">
+<script>try { if (sessionStorage.getItem("oy-veil")) document.documentElement.classList.add("veil-in"); } catch (e) {}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="icon" type="image/png" href="../../../../images/favicon.png">
+<link rel="apple-touch-icon" href="../../../../images/webclip.png">
+<style>
+/* 히어로 */
+.ahero { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; color: var(--white); background: #23241f; }
+.ahero-media { position: absolute; inset: 0; }
+.ahero-media img, .ahero-media canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ahero-media canvas { opacity: 0; transition: opacity 1s; }
+.ahero-media.gl canvas { opacity: 1; }
+.ahero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 18, 15, .55) 0%, rgba(18, 18, 15, .12) 22%, rgba(18, 18, 15, .08) 45%, rgba(18, 18, 15, .7) 100%); }
+.ahero-copy { position: absolute; inset: auto var(--m) calc(32px + env(safe-area-inset-bottom)); display: grid; gap: 22px; }
+.ahero .meta { color: var(--white-2); }
+.ahero h1 { display: grid; gap: 10px; }
+.ahero h1 .lat { font-family: var(--lat); font-weight: 300; font-size: clamp(88px, 15vw, 240px); line-height: .84; letter-spacing: -.03em; }
+.ahero h1 .kr { font-family: var(--kr); font-weight: 300; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.35; letter-spacing: -.02em; }
+.ahero-side { display: grid; gap: 14px; justify-items: start; }
+.ahero-side .when { font-size: 15px; color: rgba(246, 244, 239, .86); }
+.ahero-side .when .num { display: block; font-size: 32px; line-height: 1.1; color: var(--white); }
+.status { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; }
+.status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1px solid currentColor; }
+.status.live::before { background: currentColor; }
+.ahero .ulink { color: var(--white); }
+@media (min-width: 900px) { .ahero-copy { grid-template-columns: 8fr 4fr; align-items: end; bottom: 44px; } .ahero-side { justify-self: end; } }
+
+/* 왜 제주 */
+.why { padding: clamp(110px, 13vw, 190px) var(--m) clamp(96px, 11vw, 160px); display: grid; gap: 28px; }
+.why .meta { color: var(--mute); }
+.why .big { font-family: var(--kr); font-weight: 300; font-size: clamp(27px, 3.4vw, 50px); line-height: 1.5; letter-spacing: -.02em; max-width: 21em; }
+.why .small { color: #3c3b37; max-width: 32em; font-size: 17px; }
+@media (min-width: 900px) { .why { grid-template-columns: 2fr 7fr 3fr; gap: 24px; } .why .small { grid-column: 2; } }
+
+/* 과정 안내 */
+.facts { display: grid; }
+.facts > div { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 18px 0; border-top: 1px solid var(--line); }
+.facts > div:last-child { border-bottom: 1px solid var(--line); }
+.facts dt { font-size: 14px; color: var(--mute); min-height: 1em; }
+.facts dd { font-family: var(--kr); font-size: clamp(21px, 2vw, 27px); letter-spacing: -.015em; line-height: 1.4; }
+.facts dd small { display: block; font-family: var(--sans); font-size: 14px; color: var(--mute); letter-spacing: 0; margin-top: 2px; }
+.incl { display: grid; gap: 24px; margin-top: 56px; }
+.incl h3 { color: var(--mute); }
+.incl ul { display: grid; gap: 0; }
+.incl li { padding: 12px 0; border-top: 1px solid var(--line); font-family: var(--kr); font-size: 19px; }
+.incl p { font-family: var(--kr); font-weight: 300; font-size: 20px; line-height: 1.65; max-width: 24em; }
+.incl figure .ph { aspect-ratio: 3 / 2; }
+@media (min-width: 900px) {
+  .facts > div { grid-template-columns: 2fr 7fr; gap: 24px; align-items: baseline; }
+  .incl { grid-template-columns: 2fr 4fr 6fr; gap: 24px; align-items: start; }
+  .incl ul { grid-template-columns: 1fr; }
+}
+
+/* 200시간 원 */
+.hours { display: grid; gap: 48px; align-items: center; }
+.ring { position: relative; width: min(100%, 520px); justify-self: center; aspect-ratio: 1; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.ring .seg { fill: none; stroke: var(--ink); stroke-width: 14; transition: stroke-dasharray 1.6s var(--ease), opacity .4s; }
+.ring .base { fill: none; stroke: var(--line); stroke-width: 1; }
+.ring.dim .seg { opacity: .18; }
+.ring.dim .seg.on { opacity: 1; }
+.ring-c { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 4px; pointer-events: none; }
+.ring-c b { font-family: var(--lat); font-weight: 300; font-size: clamp(76px, 9vw, 132px); line-height: .9; font-variant-numeric: lining-nums; }
+.ring-c span { font-family: var(--kr); font-size: 17px; color: var(--mute); max-width: 12em; }
+.legend li { border-top: 1px solid var(--line); }
+.legend li:last-child { border-bottom: 1px solid var(--line); }
+.legend button { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 14px 0; text-align: left; min-height: 64px; }
+.legend b { font-family: var(--kr); font-weight: 400; font-size: 21px; letter-spacing: -.015em; }
+.legend .h { font-family: var(--lat); font-size: 24px; font-variant-numeric: tabular-nums; }
+.legend .d { grid-column: 1 / -1; font-size: 14px; color: var(--mute); }
+.legend:hover button b { color: rgba(27, 27, 24, .4); }
+.legend button:hover b, .legend button:focus-visible b { color: var(--ink); }
+@media (min-width: 900px) { .hours { grid-template-columns: 6fr 5fr; gap: 0 8vw; } }
+
+/* 지난 과정의 장면 */
+.rail { display: flex; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding: 0 var(--m) 8px; margin: 0 calc(var(--m) * -1); scrollbar-width: none; cursor: grab; }
+.rail::-webkit-scrollbar { display: none; }
+.rail.drag { cursor: grabbing; scroll-snap-type: none; }
+.rail.drag * { pointer-events: none; }
+.rail figure { flex: 0 0 auto; scroll-snap-align: start; }
+.rail .ph { height: min(62vh, 520px); }
+.rail img { width: auto; height: 100%; object-fit: cover; }
+@media (max-width: 899px) { .rail .ph { height: 380px; } .rail figure { max-width: 84vw; } .rail img { width: 100%; } }
+
+/* 서울 과정 */
+.seoul { display: grid; gap: 40px; }
+.seoul .ph { aspect-ratio: 4 / 3; }
+@media (min-width: 900px) { .seoul { grid-template-columns: 5fr 7fr; gap: 0 6vw; align-items: start; } .seoul .facts > div { grid-template-columns: 2fr 5fr; } }
+
+/* 수료 뒤 */
+.after { display: grid; gap: 28px; }
+.after .ph { aspect-ratio: 3 / 2; }
+.after h3 { font-family: var(--kr); font-weight: 400; font-size: clamp(30px, 3vw, 44px); letter-spacing: -.02em; line-height: 1.2; }
+.after p { font-family: var(--kr); font-weight: 300; font-size: 20px; line-height: 1.65; max-width: 24em; }
+@media (min-width: 900px) { .after { grid-template-columns: 7fr 5fr; gap: 0 6vw; align-items: end; } }
+
+/* 이런 분께, 문답 */
+.fits li { padding: 16px 0; border-top: 1px solid var(--line); font-family: var(--kr); font-weight: 300; font-size: clamp(21px, 2vw, 28px); letter-spacing: -.015em; }
+.fits li:last-child { border-bottom: 1px solid var(--line); }
+.qa details { border-top: 1px solid var(--line); }
+.qa details:last-child { border-bottom: 1px solid var(--line); }
+.qa summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr 24px; gap: 16px; align-items: center; min-height: 72px; padding: 14px 0; font-family: var(--kr); font-size: clamp(20px, 1.9vw, 26px); letter-spacing: -.015em; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary i { width: 16px; height: 16px; position: relative; justify-self: end; }
+.qa summary i::before, .qa summary i::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: currentColor; transition: transform .4s var(--ease); }
+.qa summary i::after { transform: rotate(90deg); }
+.qa details[open] summary i::after { transform: rotate(0); }
+.qa .a { padding: 0 0 24px; display: grid; gap: 8px; max-width: 36em; color: #3c3b37; }
+.qa .src { font-size: 13px; color: var(--mute); text-decoration: underline; text-underline-offset: 3px; justify-self: start; min-height: 32px; display: inline-flex; align-items: center; }
+.two { display: grid; gap: 64px; }
+@media (min-width: 900px) { .two { grid-template-columns: 5fr 7fr; gap: 0 6vw; } }
+
+/* 관련 글 */
+.rel { display: grid; gap: 18px; }
+.rel .ph { aspect-ratio: 16 / 9; }
+.rel .m { color: var(--mute); font-size: 14px; }
+.rel b { font-family: var(--kr); font-weight: 400; font-size: clamp(28px, 3vw, 44px); letter-spacing: -.02em; line-height: 1.2; }
+.rel p { font-family: var(--kr); font-weight: 300; font-size: 19px; max-width: 26em; }
+.rel:hover b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 7px; }
+@media (min-width: 900px) { .rel { grid-template-columns: 7fr 5fr; gap: 0 6vw; align-items: end; } }
+</style>
+</head>
+<body data-page="academy">
+<a class="sr" href="#main">본문 바로가기</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="veil" aria-hidden="true"><i></i></div>
+
+<header class="top" id="top">
+  <div class="top-in">
+    <a class="wordmark" href="index.html" aria-label="오요가 처음으로"><i class="mark" aria-hidden="true"></i><b>O-yoga</b></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="schedule.html" data-nav="schedule">시간표</a>
+      <a href="teachers.html" data-nav="teachers">선생님</a>
+      <a href="academy.html" data-nav="academy">지도자 과정</a>
+      <a href="journal.html" data-nav="journal">이야기</a>
+    </nav>
+    <div class="top-right">
+      <a class="pill pill-light top-book" href="https://pf.kakao.com/_RxlsDxl">과정 상담</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="메뉴 열기"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9h18M3 15h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="전체 메뉴">
+  <button class="close" id="menuClose" type="button" aria-label="메뉴 닫기"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 5l12 12M17 5L5 17"/></svg></button>
+  <span class="wordmark menu-mark" aria-hidden="true"><i class="mark"></i><b>O-yoga</b></span>
+  <a href="index.html" data-nav="home">처음</a>
+  <a href="schedule.html" data-nav="schedule">시간표</a>
+  <a href="teachers.html" data-nav="teachers">선생님</a>
+  <a href="academy.html" data-nav="academy">지도자 과정</a>
+  <a href="journal.html" data-nav="journal">이야기</a>
+  <div class="sub">
+    <a href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+    <a href="https://pf.kakao.com/_RxlsDxl">카카오톡으로 묻기</a>
+  </div>
+</nav>
+
+<main id="main">
+  <section class="ahero" data-dark aria-labelledby="hTitle">
+    <div class="ahero-media" id="heroMedia">
+      <img id="heroImg" src="../assets/blog/pavilion.jpg" alt="제주 숲속 나무 정자에서 명상하는 지도자 과정 수련생들" fetchpriority="high">
+      <canvas id="heroGL" aria-hidden="true"></canvas>
+    </div>
+    <div class="ahero-shade"></div>
+    <div class="ahero-copy">
+      <div data-intro style="display:grid;gap:18px">
+        <p class="meta">O-yoga Academy, RYT200</p>
+        <h1 id="hTitle"><span class="line-mask"><span class="lat">Retreat</span></span><span class="line-mask"><span class="kr">제주 리트릿 지도자 과정</span></span></h1>
+      </div>
+      <div class="ahero-side">
+        <p class="when"><span class="num" id="when">11.08 – 11.22</span>2026 하반기, 14박 15일</p>
+        <p class="status" id="status"></p>
+        <div class="acts"><a class="pill pill-light" href="https://pf.kakao.com/_RxlsDxl" data-cursor="상담">카카오톡으로 상담</a><a class="ulink" href="tel:01087155501">010-8715-5501</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" aria-labelledby="whyTitle">
+    <p class="meta">Why Jeju</p>
+    <h2 class="sr" id="whyTitle">왜 제주에서</h2>
+    <p class="big">일상에서 완전히 벗어나 매일 함께 수련할 수 있다면. 서울에서 주말 과정을 이끌며 품었던 그 바람으로, 제주에서 함께 살며 배우는 과정을 열었어요.</p>
+    <p class="small">14박 15일 동안 같이 수련하고 밥을 먹고 이야기하며 서로의 변화를 곁에서 지켜봐요. 부족한 부분은 바로 채우고, 배운 이론은 곧바로 몸과 마음으로 겪어요. 철학과 해부학, 명상과 티칭이 하나로 이어지는 과정이에요.</p>
+  </section>
+
+  <section class="sec" id="info" aria-labelledby="infoTitle">
+    <div class="sec-head">
+      <span class="meta">2026 하반기</span>
+      <h2 id="infoTitle">과정 안내</h2>
+      <p>블로그 모집 글의 내용을 한눈에 보이게 정리했어요.</p>
+    </div>
+    <dl class="facts" id="facts"></dl>
+    <div class="incl">
+      <h3 class="meta">포함</h3>
+      <ul id="incl"></ul>
+      <figure>
+        <div class="ph reveal"><img src="../assets/blog/glassroom.jpg" alt="유리 바닥 위 매트에서 수련하는 사람들" loading="lazy" data-par="8"></div>
+        <figcaption id="wellness"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec" id="hours" aria-labelledby="hrTitle">
+    <div class="sec-head">
+      <span class="meta">200 hours</span>
+      <h2 id="hrTitle">무엇을 배우나요</h2>
+      <p>하타를 바탕으로 빈야사, 크라마 플로우, 해부학과 소도구 테라피, 티칭과 핸즈온까지 배워요.</p>
+    </div>
+    <div class="hours">
+      <div class="ring" id="ring"><svg viewBox="0 0 400 400" aria-hidden="true"><circle class="base" cx="200" cy="200" r="170"/></svg><div class="ring-c"><b id="ringN">200</b><span id="ringL">시간, 미국 Yoga Alliance 기준</span></div></div>
+      <ul class="legend" id="legend"></ul>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="scTitle">
+    <div class="sec-head">
+      <span class="meta">Jeju, 2025</span>
+      <h2 id="scTitle">지난 과정의 장면</h2>
+      <p>2025 제주 지도자 과정과 리트릿에서 찍은 사진이에요. 옆으로 넘겨 보세요.</p>
+    </div>
+    <div class="rail" id="rail" data-cursor="드래그">
+      <figure><div class="ph"><img src="../assets/blog/treepose.jpg" alt="함께 나무 자세를 하는 과정 수련생들" loading="lazy" draggable="false"></div><figcaption>오요가 리트릿, 제주</figcaption></figure>
+      <figure><div class="ph"><img src="../assets/blog/forestpath.jpg" alt="제주 숲길을 걷는 사람들" loading="lazy" draggable="false"></div><figcaption>제주 에가톳, 2025 지도자 과정</figcaption></figure>
+      <figure><div class="ph"><img src="../assets/blog/lighthouse.jpg" alt="안개 낀 바닷가 등대 앞의 과정 수련생들" loading="lazy" draggable="false"></div><figcaption>오요가 리트릿, 제주</figcaption></figure>
+      <figure><div class="ph"><img src="../assets/blog/mats.jpg" alt="밝은 수련실에서 매트를 정리하는 사람들" loading="lazy" draggable="false"></div><figcaption>제주 에가톳, 2025 지도자 과정</figcaption></figure>
+      <figure><div class="ph"><img src="../assets/blog/embrace.jpg" alt="과정을 마치며 서로 안아 주는 사람들" loading="lazy" draggable="false"></div><figcaption>마지막 날</figcaption></figure>
+      <figure><div class="ph"><img src="../assets/blog/walkwoods.jpg" alt="숲속을 걸으며 수련하는 사람들" loading="lazy" draggable="false"></div><figcaption>오요가 제주 리트릿</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec" id="seoul" aria-labelledby="seTitle">
+    <div class="sec-head">
+      <span class="meta">Seoul</span>
+      <h2 id="seTitle">서울 주말 과정</h2>
+      <p>다음 서울 과정 일정은 블로그와 카카오톡 채널로 알려 드려요.</p>
+    </div>
+    <div class="seoul">
+      <figure><div class="ph reveal"><img src="../assets/film/certs.jpg" alt="Yoga Alliance 수료증들" loading="lazy" data-par="8"></div><figcaption>수료증</figcaption></figure>
+      <dl class="facts" id="seoulFacts"></dl>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="afTitle">
+    <div class="after">
+      <figure><div class="ph reveal"><img src="../assets/blog/openclass.jpg" alt="꽃을 들고 아치 조명 아래 모인 과정 수료생들" loading="lazy" data-par="8"></div><figcaption>2023 제주 지도자 과정 수료 오픈클래스</figcaption></figure>
+      <div style="display:grid;gap:16px">
+        <p class="meta" style="color:var(--mute)">After</p>
+        <h3 id="afTitle">수료 뒤, 첫 수업은 오픈클래스로</h3>
+        <p>과정을 마친 선생님들이 오요가에서 첫 수업을 열어요. 회원이 아니어도 비용 없이 들을 수 있어요.</p>
+        <a class="ulink" href="https://blog.naver.com/ojyyoga/224281828846">2026 오픈클래스 소식</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-label="이런 분께, 묻고 답하기">
+    <div class="two">
+      <div><div class="sec-head" style="grid-template-columns:1fr;margin-bottom:28px"><span class="meta">For you</span><h2>이런 분께</h2></div><ul class="fits" id="fits"></ul></div>
+      <div><div class="sec-head" style="grid-template-columns:1fr;margin-bottom:28px"><span class="meta">Q&amp;A</span><h2>묻고 답하기</h2></div><div class="qa" id="qa"></div></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-label="관련 글">
+    <a class="rel" href="story.html?s=silence" data-cursor="읽기">
+      <div class="ph reveal"><img src="../assets/blog/forestpath.jpg" alt="" loading="lazy" data-par="8"></div>
+      <div style="display:grid;gap:12px"><span class="m">수련 노트, 2025 과정의 사진과 함께</span><b>요가와 침묵</b><p>침묵은 비어 있음이 아니라, 알아차림이에요.</p></div>
+    </a>
+  </section>
+
+  <section class="band" data-dark data-dock-stop aria-labelledby="ctaTitle">
+    <div class="band-in">
+      <div class="band-txt" data-rise>
+        <span class="meta">Talk to us</span>
+        <h2 id="ctaTitle"><span class="line-mask"><span>궁금한 건</span></span><span class="line-mask"><span>편하게 물어봐요.</span></span></h2>
+        <p>상담은 카카오톡이 가장 빨라요. 인스타그램 메시지와 전화로도 답해 드려요.</p>
+        <div class="acts">
+          <a class="pill pill-light" href="https://pf.kakao.com/_RxlsDxl" data-cursor="상담">카카오톡으로 상담</a>
+          <a class="ulink" href="tel:01087155501">010-8715-5501</a>
+        </div>
+      </div>
+      <figure class="band-fig">
+        <div class="ph reveal"><img src="../assets/blog/lighthouse.jpg" alt="안개 낀 바닷가 등대 앞의 과정 수련생들" loading="lazy" data-par="10"></div>
+        <figcaption>오요가 리트릿, 제주</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-grid">
+      <div><span class="meta">Studio</span>서울 마포구 굴레방로1길 25,<br>애오개 아이파크 상가 214호<br>5호선 애오개역</div>
+      <div><span class="meta">Contact</span><a href="tel:01087155501">010-8715-5501</a><br><a href="https://pf.kakao.com/_RxlsDxl">카카오톡 채널</a></div>
+      <div class="foot-links"><span class="meta">Pages</span><a href="schedule.html">시간표</a><a href="teachers.html">선생님</a><a href="academy.html">지도자 과정</a><a href="journal.html">이야기</a></div>
+      <div class="foot-links"><span class="meta">Follow</span><a href="https://www.instagram.com/o_yoga_studio/">Instagram</a><a href="https://blog.naver.com/ojyyoga">Naver Blog</a></div>
+    </div>
+    <p class="giant" aria-hidden="true">O-yoga</p>
+  </footer>
+</main>
+
+<div class="dock" id="dock"><a class="pill pill-ink" href="https://pf.kakao.com/_RxlsDxl"><span class="dot" aria-hidden="true"></span><span>카카오톡으로 상담</span></a></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  const S = OYS, D = S.D, A = D.ACADEMY, J = A.jeju, now = S.seoulNow(), $ = (id) => document.getElementById(id);
+
+  /* 상태: 시작 전, 진행 중, 끝남 */
+  const gap = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+  const st = $("status");
+  if (now.date < J.start) st.textContent = `시작까지 ${gap(now.date, J.start)}일`;
+  else if (now.date <= J.end) { st.textContent = `지금 제주에서 진행 중, ${gap(J.start, now.date) + 1}일째`; st.classList.add("live"); }
+  else st.textContent = "이번 과정은 끝났어요. 다음 과정은 상담으로 알려 드려요.";
+
+  /* 과정 안내 */
+  const fact = ([k, v, s]) => `<div><dt>${k}</dt><dd>${v}${s ? `<small>${s}</small>` : ""}</dd></div>`;
+  $("facts").innerHTML = J.facts.map(fact).join("");
+  $("incl").innerHTML = J.includes.map((x) => `<li>${x}</li>`).join("");
+  $("wellness").textContent = J.wellness;
+  $("seoulFacts").innerHTML = A.seoul.facts.map(fact).join("") + `<div><dt>원문</dt><dd><a class="ulink" href="${D.LINKS.blog(A.seoul.src)}">2026 상반기 모집 글</a></dd></div>`;
+
+  /* 200시간 원: 같은 O를 배움의 비율로 나눈다 */
+  const R = 170, C = 2 * Math.PI * R, GAP = 8, ring = $("ring"), svg = ring.querySelector("svg");
+  let acc = 0;
+  const segs = A.hours.map(([n, h]) => { const len = C * h / 200; const el = document.createElementNS("http://www.w3.org/2000/svg", "circle"); el.setAttribute("class", "seg"); el.setAttribute("cx", 200); el.setAttribute("cy", 200); el.setAttribute("r", R); el.style.strokeDasharray = `0 ${C}`; el.style.strokeDashoffset = String(-acc - GAP / 2); el.dataset.len = String(len - GAP); acc += len; svg.appendChild(el); return el; });
+  $("legend").innerHTML = A.hours.map(([n, h, d], i) => `<li><button type="button" data-i="${i}"><b>${n}</b><span class="h">${h}</span>${d ? `<span class="d">${d}</span>` : ""}</button></li>`).join("");
+  const draw = () => segs.forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; el.style.strokeDasharray = `${el.dataset.len} ${C}`; });
+  if (S.reduce) draw(); else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { draw(); o.disconnect(); } }, { threshold: 0.35 }).observe(ring);
+  const focus = (i) => {
+    ring.classList.toggle("dim", i >= 0);
+    segs.forEach((el, j) => { el.classList.toggle("on", j === i); el.style.transitionDelay = "0s"; });
+    $("ringN").textContent = i >= 0 ? A.hours[i][1] : "200";
+    $("ringL").textContent = i >= 0 ? `시간, ${A.hours[i][0]}` : "시간, 미국 Yoga Alliance 기준";
+  };
+  $("legend").querySelectorAll("button").forEach((b) => {
+    const i = Number(b.dataset.i);
+    b.addEventListener("mouseenter", () => focus(i)); b.addEventListener("focus", () => focus(i));
+    b.addEventListener("mouseleave", () => focus(-1)); b.addEventListener("blur", () => focus(-1));
+    b.addEventListener("click", () => focus(i));
+  });
+
+  /* 이런 분께, 문답 */
+  $("fits").innerHTML = J.fits.map((x) => `<li>${x}</li>`).join("");
+  $("qa").innerHTML = A.faq.map(([q, a, src]) => `<details><summary>${q}<i aria-hidden="true"></i></summary><div class="a"><p>${a}</p><a class="src" href="${D.LINKS.blog(src)}">블로그 원문</a></div></details>`).join("");
+
+  /* 사진 줄: 마우스로 끌어 넘기기 */
+  const rail = $("rail");
+  let down = false, sx = 0, sl = 0;
+  rail.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; down = true; sx = e.clientX; sl = rail.scrollLeft; });
+  addEventListener("pointermove", (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) rail.classList.add("drag"); rail.scrollLeft = sl - dx; });
+  addEventListener("pointerup", () => { if (!down) return; down = false; rail.classList.remove("drag"); });
+
+  S.fogGL($("heroGL"), $("heroImg"), $("heroMedia"));
+  S.start();
+  if (S.reduce || !window.gsap) return;
+  gsap.to("#heroMedia", { scale: 1.08, yPercent: 8, ease: "none", scrollTrigger: { trigger: ".ahero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".ahero-copy", { yPercent: -16, autoAlpha: 0, ease: "none", scrollTrigger: { trigger: ".ahero", start: "top top", end: "62% top", scrub: true } });
+})();
+</script>
+</body>
+</html>

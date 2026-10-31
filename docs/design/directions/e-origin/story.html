@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>이야기 — 시안 E · 오요가</title>
+<meta name="description" content="오요가 블로그 글을 사이트에 맞게 다시 쓴 수련 노트.">
+<script>try { if (sessionStorage.getItem("oy-veil")) document.documentElement.classList.add("veil-in"); } catch (e) {}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="icon" type="image/png" href="../../../../images/favicon.png">
+<link rel="apple-touch-icon" href="../../../../images/webclip.png">
+<style>
+.ah { padding: calc(var(--top) + clamp(48px, 8vw, 110px)) var(--m) clamp(40px, 5vw, 64px); display: grid; gap: 18px; }
+.ah .m { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; color: var(--mute); }
+.ah .m a { text-decoration: underline; text-underline-offset: 3px; }
+.ah h1 { font-family: var(--kr); font-weight: 300; font-size: clamp(52px, 8vw, 128px); line-height: 1.02; letter-spacing: -.04em; }
+.ah .sub { font-family: var(--kr); font-weight: 300; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.4; color: var(--mute); }
+@media (min-width: 900px) { .ah { grid-template-columns: 2fr 10fr; gap: 18px 24px; } .ah > * { grid-column: 2; } .ah .m { grid-column: 1; grid-row: 1 / 4; flex-direction: column; padding-top: 12px; } }
+.hero-fig { margin: 0 var(--m); }
+.hero-fig .ph { aspect-ratio: 16 / 9; }
+@media (max-width: 899px) { .hero-fig .ph { aspect-ratio: 4 / 3; } }
+
+.art { padding: clamp(64px, 8vw, 110px) var(--m) clamp(96px, 11vw, 150px); display: grid; gap: 0; }
+.art > * { max-width: 36em; }
+.art .lead { font-family: var(--kr); font-weight: 300; font-size: clamp(23px, 2.3vw, 31px); line-height: 1.65; letter-spacing: -.015em; margin-bottom: 56px; max-width: 24em; text-wrap: balance; }
+.art h2 { font-family: var(--kr); font-weight: 400; font-size: clamp(25px, 2.4vw, 32px); letter-spacing: -.02em; line-height: 1.35; margin: 48px 0 14px; }
+.art p.b { font-family: var(--kr); font-size: 18px; line-height: 1.95; color: #2c2b28; }
+.art blockquote { max-width: 18em; margin: 72px 0; padding-top: 22px; border-top: 1px solid var(--ink); font-family: var(--kr); font-weight: 300; font-size: clamp(30px, 3.6vw, 54px); line-height: 1.4; letter-spacing: -.03em; }
+.art ul.l { display: grid; gap: 0; margin-top: 6px; }
+.art ul.l li { position: relative; padding: 14px 0 14px 30px; border-top: 1px solid var(--line); font-family: var(--kr); font-size: 18px; line-height: 1.75; }
+.art ul.l li:last-child { border-bottom: 1px solid var(--line); }
+.art ul.l li::before { content: ""; position: absolute; left: 2px; top: 23px; width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--ink); }
+.art figure { max-width: none; margin: 64px 0; }
+.art .pair { display: grid; gap: 12px; }
+.art .pair .ph { aspect-ratio: 4 / 5; }
+.art .wide .ph { aspect-ratio: 3 / 2; }
+@media (min-width: 900px) {
+  .art { grid-template-columns: 2fr 7fr 3fr; column-gap: 24px; }
+  .art > * { grid-column: 2; }
+  .art blockquote { grid-column: 2 / 4; }
+  .art figure { grid-column: 1 / -1; }
+  .art .pair { grid-template-columns: 1fr 1fr; gap: 24px; width: calc(100% * 9 / 12); margin-left: auto; margin-right: auto; }
+  .art .wide { width: 100%; }
+}
+.srcbox { margin-top: 72px; padding-top: 22px; border-top: 1px solid var(--ink); display: grid; gap: 8px; color: var(--mute); font-size: 15px; }
+.srcbox a { color: var(--ink); }
+.nextup { display: grid; gap: 18px; }
+.nextup .ph { aspect-ratio: 16 / 9; }
+.nextup .m { font-size: 14px; color: var(--mute); }
+.nextup b { font-family: var(--kr); font-weight: 400; font-size: clamp(30px, 3.2vw, 48px); letter-spacing: -.025em; line-height: 1.2; }
+.nextup p { font-family: var(--kr); font-weight: 300; font-size: 19px; max-width: 26em; color: #3c3b37; }
+.nextup:hover b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 7px; }
+@media (min-width: 900px) { .nextup { grid-template-columns: 7fr 5fr; gap: 0 6vw; align-items: end; } }
+.missing { padding: calc(var(--top) + 120px) var(--m) 160px; display: grid; gap: 22px; justify-items: start; }
+.missing h1 { font-family: var(--kr); font-weight: 300; font-size: clamp(40px, 6vw, 80px); letter-spacing: -.03em; line-height: 1.15; }
+.missing p { color: var(--mute); }
+</style>
+</head>
+<body data-page="journal" data-top="paper">
+<a class="sr" href="#main">본문 바로가기</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="veil" aria-hidden="true"><i></i></div>
+
+<header class="top on-paper" id="top">
+  <div class="top-in">
+    <a class="wordmark" href="index.html" aria-label="오요가 처음으로"><i class="mark" aria-hidden="true"></i><b>O-yoga</b></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="schedule.html" data-nav="schedule">시간표</a>
+      <a href="teachers.html" data-nav="teachers">선생님</a>
+      <a href="academy.html" data-nav="academy">지도자 과정</a>
+      <a href="journal.html" data-nav="journal">이야기</a>
+    </nav>
+    <div class="top-right">
+      <a class="pill pill-light top-book" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="메뉴 열기"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9h18M3 15h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="전체 메뉴">
+  <button class="close" id="menuClose" type="button" aria-label="메뉴 닫기"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 5l12 12M17 5L5 17"/></svg></button>
+  <span class="wordmark menu-mark" aria-hidden="true"><i class="mark"></i><b>O-yoga</b></span>
+  <a href="index.html" data-nav="home">처음</a>
+  <a href="schedule.html" data-nav="schedule">시간표</a>
+  <a href="teachers.html" data-nav="teachers">선생님</a>
+  <a href="academy.html" data-nav="academy">지도자 과정</a>
+  <a href="journal.html" data-nav="journal">이야기</a>
+  <div class="sub">
+    <a href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+    <a href="https://pf.kakao.com/_RxlsDxl">카카오톡으로 묻기</a>
+  </div>
+</nav>
+
+<main id="main"><article id="story"></article>
+
+  <footer class="foot">
+    <div class="foot-grid">
+      <div><span class="meta">Studio</span>서울 마포구 굴레방로1길 25,<br>애오개 아이파크 상가 214호<br>5호선 애오개역</div>
+      <div><span class="meta">Contact</span><a href="tel:01087155501">010-8715-5501</a><br><a href="https://pf.kakao.com/_RxlsDxl">카카오톡 채널</a></div>
+      <div class="foot-links"><span class="meta">Pages</span><a href="schedule.html">시간표</a><a href="teachers.html">선생님</a><a href="academy.html">지도자 과정</a><a href="journal.html">이야기</a></div>
+      <div class="foot-links"><span class="meta">Follow</span><a href="https://www.instagram.com/o_yoga_studio/">Instagram</a><a href="https://blog.naver.com/ojyyoga">Naver Blog</a></div>
+    </div>
+    <p class="giant" aria-hidden="true">O-yoga</p>
+  </footer>
+</main>
+
+<div class="dock" id="dock"><a class="pill pill-ink" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615"><span class="dot" aria-hidden="true"></span><span>체험 수업 예약</span></a></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  const S = OYS, D = S.D, img = S.img, el = document.getElementById("story");
+  const key = new URLSearchParams(location.search).get("s") || "silence", s = D.STORIES[key];
+  if (!s) {
+    el.innerHTML = `<section class="missing" data-intro><p class="meta" style="color:var(--mute)">Journal</p><h1><span class="line-mask"><span>이 글은 아직</span></span><span class="line-mask"><span>옮기지 않았어요.</span></span></h1><p>사이트로 옮긴 글은 이야기 목록에서, 나머지는 블로그에서 읽을 수 있어요.</p><div class="acts"><a class="ulink" href="journal.html">이야기 목록</a><a class="ulink" href="${D.LINKS.blogHome}">블로그</a></div></section>`;
+    S.start(); return;
+  }
+  document.title = `${s.title} — 시안 E · 오요가`;
+  const block = ([t, a, b, c]) => {
+    if (t === "h") return `<h2>${a}</h2>`;
+    if (t === "p") return `<p class="b">${a}</p>`;
+    if (t === "q") return `<blockquote>${a}</blockquote>`;
+    if (t === "list") return `<ul class="l">${a.map((x) => `<li>${x}</li>`).join("")}</ul>`;
+    if (t === "pair") return `<figure><div class="pair"><div class="ph reveal"><img src="${img(a)}" alt="" loading="lazy" data-par="8"></div><div class="ph reveal"><img src="${img(b)}" alt="" loading="lazy" data-par="8"></div></div><figcaption style="text-align:center">${c}</figcaption></figure>`;
+    if (t === "wide") return `<figure class="wide"><div class="ph reveal"><img src="${img(a)}" alt="" loading="lazy" data-par="8"></div><figcaption>${b}</figcaption></figure>`;
+    return "";
+  };
+  const nextK = s.next, isAcademy = nextK === "academy", n = isAcademy ? null : D.STORIES[nextK];
+  const next = isAcademy
+    ? `<a class="nextup" href="academy.html" data-cursor="보기"><div class="ph reveal"><img src="${img("blog/treepose")}" alt="" loading="lazy" data-par="8"></div><div style="display:grid;gap:12px"><span class="m">이 글의 사진은 2025 제주 지도자 과정에서 찍었어요</span><b>2026 하반기 제주 리트릿 TTC</b><p>11월 8일부터 22일까지, 14박 15일. 침묵과 수련을 함께 살아 보는 시간이에요.</p></div></a>`
+    : `<a class="nextup" href="story.html?s=${nextK}" data-cursor="읽기"><div class="ph reveal"><img src="${img(n.img)}" alt="" loading="lazy" data-par="8"></div><div style="display:grid;gap:12px"><span class="m">다음 글</span><b>${n.title}</b><p>${n.lead}</p></div></a>`;
+  el.innerHTML = `
+    <header class="ah" data-intro>
+      <p class="m"><span>${s.cat}</span><span>${S.ymd(s.date)}</span><span>${s.read}분 읽기</span></p>
+      <h1><span class="line-mask"><span>${s.title}</span></span></h1>
+      <p class="sub">${s.sub}</p>
+    </header>
+    <figure class="hero-fig"><div class="ph reveal"><img src="${img(s.img)}" alt="" data-par="8"></div><figcaption>${s.cap}</figcaption></figure>
+    <div class="art">
+      <p class="lead">${s.lead}</p>
+      ${s.body.map(block).join("")}
+      <div class="srcbox"><span>이 글은 오요가 블로그의 「${s.orig || s.title}」(${S.ymd(s.date)})을 줄여 다시 썼어요.</span><a class="ulink" href="${D.LINKS.blog(s.src)}">블로그 원문</a></div>
+    </div>
+    <section class="sec" aria-label="이어서 읽기">${next}</section>`;
+  S.start();
+})();
+</script>
+</body>
+</html>

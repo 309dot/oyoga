@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>시안 E · 고요의 원점 — 오요가</title>
+<meta name="description" content="오요가 홈 리디자인 시안 E. A의 고요와 D의 장면을 합치고, 블로그 콘텐츠를 사이트 안으로 옮긴 방향.">
+<script>try { if (sessionStorage.getItem("oy-veil")) document.documentElement.classList.add("veil-in"); } catch (e) {}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="icon" type="image/png" href="../../../../images/favicon.png">
+<link rel="apple-touch-icon" href="../../../../images/webclip.png">
+<style>
+/* ---------- 여는 화면 ---------- */
+.loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--paper); color: var(--ink); }
+.loader .ld-mark { width: 128px; aspect-ratio: 173 / 166; height: auto; }
+.loader .cap { position: absolute; top: calc(50% + 96px); color: var(--mute); }
+
+/* ---------- 히어로 ---------- */
+.hero { position: relative; height: 100vh; height: 100svh; }
+.hero-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; color: var(--white); }
+.hero-media { position: absolute; inset: 0; background: #2a2b27; }
+.hero-media img, .hero-media canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-media canvas { opacity: 0; transition: opacity 1s; }
+.hero-media.gl canvas { opacity: 1; }
+.hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 18, 15, .5) 0%, rgba(18, 18, 15, .16) 15%, rgba(18, 18, 15, 0) 30%, rgba(18, 18, 15, 0) 46%, rgba(18, 18, 15, .62) 100%); }
+.hero-copy { position: absolute; inset: auto var(--m) calc(30px + env(safe-area-inset-bottom)); display: grid; gap: 26px; }
+.hero h1 { font-family: var(--kr); font-weight: 300; font-size: clamp(50px, 7vw, 118px); line-height: 1.06; letter-spacing: -.035em; }
+.hero-side { display: grid; gap: 16px; max-width: 27em; font-size: 15px; color: rgba(246, 244, 239, .88); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 4px 22px; color: rgba(246, 244, 239, .72); }
+.next { display: grid; gap: 2px; padding-top: 14px; border-top: 1px solid var(--line-d); min-height: 44px; }
+.next .k { font-size: 13px; color: var(--white-2); }
+.next .v { font-family: var(--kr); font-size: 18px; line-height: 1.45; color: var(--white); }
+.next:hover .v { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+@media (min-width: 900px) {
+  .hero-copy { grid-template-columns: 8fr 4fr; align-items: end; bottom: 44px; }
+  .hero-side { justify-self: end; padding-bottom: 10px; }
+}
+
+/* ---------- 문장 ---------- */
+.paper { position: relative; z-index: 2; background: var(--paper); }
+.statement { padding: clamp(120px, 16vw, 220px) var(--m) clamp(96px, 12vw, 170px); display: grid; gap: 40px; }
+.statement .lab { color: var(--mute); }
+.statement p.big { font-family: var(--kr); font-weight: 300; font-size: clamp(27px, 3.5vw, 54px); line-height: 1.5; letter-spacing: -.02em; max-width: 21em; }
+.statement p.big .w { opacity: .16; transition: opacity .2s linear; }
+.statement-fig { justify-self: end; width: min(60vw, 360px); }
+.statement-fig .ph { aspect-ratio: 3 / 4; }
+@media (min-width: 900px) { .statement { grid-template-columns: 2fr 7fr 3fr; gap: 24px; align-items: start; } .statement-fig { margin-top: 38%; } }
+
+/* ---------- 이번 주 수업 ---------- */
+.day { position: relative; }
+.day.is-today::before { content: ""; position: absolute; top: 7px; left: 50%; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: currentColor; }
+.wk-grid { display: grid; gap: 40px; }
+.row.past .n, .row.past .t { color: rgba(27, 27, 24, .4); }
+.wk-foot { margin-top: 22px; display: grid; gap: 6px; }
+.wk-foot p { font-size: 14px; color: var(--mute); }
+@media (min-width: 900px) { .wk-grid { grid-template-columns: 6fr 5fr; gap: 0 8vw; align-items: start; } }
+
+/* ---------- 두 개의 원점 (장면) ---------- */
+.scenes { position: relative; height: 520vh; background: var(--paper); }
+.view { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #0f100e; color: var(--white); }
+.view canvas, .view .fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
+.view .fallbacks { position: absolute; inset: 0; transition: opacity .8s; }
+.view .fallback { object-fit: cover; opacity: 0; transition: opacity 1.2s var(--ease); }
+.view .fallback.on { opacity: 1; }
+.view .shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(12, 13, 12, .5) 0%, rgba(12, 13, 12, 0) 24%, rgba(12, 13, 12, 0) 50%, rgba(12, 13, 12, .74) 100%); }
+.scene-txt { position: absolute; left: var(--m); right: var(--m); bottom: calc(96px + env(safe-area-inset-bottom)); display: grid; gap: 12px; pointer-events: none; opacity: 0; text-shadow: 0 1px 28px rgba(0, 0, 0, .45); }
+.scene-txt .meta { color: var(--white-2); }
+.scene-txt .t { font-family: var(--lat); font-weight: 300; font-size: clamp(84px, 15vw, 240px); line-height: .84; letter-spacing: -.03em; }
+.scene-txt .k { font-family: var(--kr); font-weight: 300; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.4; }
+.scene-txt .d { max-width: 26em; color: rgba(246, 244, 239, .86); font-size: 15px; text-wrap: balance; }
+.scene-txt .go { pointer-events: auto; color: var(--white); }
+.hud { position: absolute; left: var(--m); right: var(--m); bottom: calc(26px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--white-2); }
+.hud .bar { flex: 1; height: 1px; background: var(--line-d); position: relative; }
+.hud .bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--white); }
+.hud .n { font-family: var(--lat); font-size: 17px; font-variant-numeric: tabular-nums; color: var(--white); white-space: nowrap; }
+.hud .hint { white-space: nowrap; }
+.snd { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: var(--white-2); margin-right: -10px; padding: 0 10px; }
+.snd svg { width: 22px; height: 22px; }
+.snd .wv { opacity: .35; transition: opacity .3s; }
+.snd[aria-pressed="true"] { color: var(--white); }
+.snd[aria-pressed="true"] .wv { opacity: 1; }
+.snd .lbl, .hud .hint { display: none; }
+@media (max-width: 899px) { .hud { bottom: calc(84px + env(safe-area-inset-bottom)); } .scene-txt { bottom: calc(140px + env(safe-area-inset-bottom)); } }
+@media (min-width: 900px) {
+  .scene-txt { grid-template-columns: 7fr 5fr; align-items: end; column-gap: 24px; }
+  .scene-txt .meta, .scene-txt .t { grid-column: 1; }
+  .scene-txt .k, .scene-txt .d, .scene-txt .go { grid-column: 2; }
+  .scene-txt .t { grid-row: 2 / 5; }
+  .snd .lbl, .hud .hint { display: inline; }
+}
+.cover { margin-top: -100vh; margin-top: -100svh; padding-top: clamp(110px, 12vw, 170px); }
+/* 움직임을 줄이면 장면을 차례로 쌓는다 */
+.scenes.static { height: auto; }
+.scenes.static .view { position: relative; height: auto; background: none; }
+.scenes.static .view > :not(.stack) { display: none; }
+.scenes.static + .cover { margin-top: 0; }
+.stack figure { position: relative; height: 92vh; overflow: hidden; color: var(--white); background: #0f100e; }
+.stack img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stack .scene-txt { opacity: 1; bottom: 40px; }
+
+/* ---------- 선생님 ---------- */
+.tidx { display: grid; gap: 0 6vw; }
+.tidx li { border-bottom: 1px solid var(--line); }
+.tl { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 0 16px; padding: 16px 0 18px; }
+.tl b { font-family: var(--kr); font-weight: 300; font-size: clamp(32px, 3.6vw, 54px); letter-spacing: -.03em; line-height: 1.2; transition: transform .6s var(--ease), color .4s; }
+.tl .cl { grid-column: 1; font-size: 14px; color: var(--mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tl .tm { grid-column: 2; grid-row: 1; font-family: var(--kr); font-size: 16px; color: var(--mute); white-space: nowrap; }
+.tidx:hover .tl b { color: rgba(27, 27, 24, .38); }
+.tidx .tl:hover b, .tidx .tl:focus-visible b { color: var(--ink); transform: translateX(12px); }
+.t-more { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: center; color: var(--mute); font-size: 15px; }
+.t-more .ulink { color: var(--ink); }
+@media (min-width: 900px) { .tidx { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- 이야기와 소식 ---------- */
+.jr { display: grid; gap: 64px; }
+.feat { display: grid; gap: 18px; align-content: start; }
+.feat .ph { aspect-ratio: 4 / 3; }
+.feat .m { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--mute); font-size: 14px; }
+.feat h3 { font-family: var(--kr); font-weight: 400; font-size: clamp(34px, 3.6vw, 56px); letter-spacing: -.03em; line-height: 1.12; }
+.feat h3 small { display: block; margin-top: 8px; font-weight: 300; font-size: .46em; letter-spacing: -.01em; color: var(--mute); }
+.feat p { font-family: var(--kr); font-weight: 300; font-size: 19px; line-height: 1.65; color: #3c3b37; max-width: 27em; }
+.feat:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; }
+.jside { display: grid; gap: 48px; align-content: start; }
+.jside h3 { margin-bottom: 8px; color: var(--mute); }
+.news a { display: grid; grid-template-columns: 86px 1fr; gap: 2px 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+.news li:last-child a { border-bottom: 1px solid var(--line); }
+.news .d { grid-row: 1 / 3; font-family: var(--lat); font-size: 19px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.news b { font-family: var(--kr); font-weight: 400; font-size: 19px; letter-spacing: -.01em; line-height: 1.4; }
+.news span { font-size: 14px; color: var(--mute); }
+.news a:hover b, .mini a:hover b { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.mini a { display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+.mini li:last-child a { border-bottom: 1px solid var(--line); }
+.mini .ph { aspect-ratio: 1; }
+.mini b { display: block; font-family: var(--kr); font-weight: 400; font-size: 21px; letter-spacing: -.015em; line-height: 1.35; }
+.mini span { font-size: 14px; color: var(--mute); }
+.j-acts { margin-top: 36px; }
+@media (min-width: 900px) { .jr { grid-template-columns: 7fr 5fr; gap: 0 6vw; align-items: start; } }
+
+@media (prefers-reduced-motion: reduce) { .loader { display: none; } .statement p.big .w { opacity: 1; } }
+</style>
+</head>
+<body class="lock" data-page="home">
+<a class="sr" href="#main">본문 바로가기</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="veil" aria-hidden="true"><i></i></div>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <span class="cap meta">O-yoga, since 2017</span>
+</div>
+
+<header class="top" id="top">
+  <div class="top-in">
+    <a class="wordmark" href="index.html" aria-label="오요가 처음으로"><i class="mark" aria-hidden="true"></i><b>O-yoga</b></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="schedule.html" data-nav="schedule">시간표</a>
+      <a href="teachers.html" data-nav="teachers">선생님</a>
+      <a href="academy.html" data-nav="academy">지도자 과정</a>
+      <a href="journal.html" data-nav="journal">이야기</a>
+    </nav>
+    <div class="top-right">
+      <a class="pill pill-light top-book" id="topBook" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="메뉴 열기"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9h18M3 15h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="전체 메뉴">
+  <button class="close" id="menuClose" type="button" aria-label="메뉴 닫기"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 5l12 12M17 5L5 17"/></svg></button>
+  <span class="wordmark menu-mark" aria-hidden="true"><i class="mark"></i><b>O-yoga</b></span>
+  <a href="index.html" data-nav="home">처음</a>
+  <a href="schedule.html" data-nav="schedule">시간표</a>
+  <a href="teachers.html" data-nav="teachers">선생님</a>
+  <a href="academy.html" data-nav="academy">지도자 과정</a>
+  <a href="journal.html" data-nav="journal">이야기</a>
+  <div class="sub">
+    <a href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+    <a href="https://pf.kakao.com/_RxlsDxl">카카오톡으로 묻기</a>
+  </div>
+</nav>
+
+<main id="main">
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-sticky" id="heroSticky" data-dark>
+      <div class="hero-media" id="heroMedia">
+        <img id="heroImg" src="../assets/film/fog.jpg" alt="안개 낀 제주 정자에 앉아 명상하는 사람" fetchpriority="high">
+        <canvas id="heroGL" aria-hidden="true"></canvas>
+      </div>
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <h1 id="heroTitle"><span class="line-mask"><span>고요를</span></span><span class="line-mask"><span>연습하는 곳</span></span></h1>
+        <div class="hero-side">
+          <p class="fade-in">서울 애오개 스튜디오와 제주 O-rest에서, 2017년부터 매일의 수련을 안내해요.</p>
+          <p class="hero-meta meta fade-in"><span>Seoul 37.55°N 126.96°E</span><span id="clock">서울 —:—</span></p>
+          <a class="next fade-in" id="next" href="schedule.html"><span class="k">다음 수업</span><span class="v">시간표 보기</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="paper">
+    <section class="statement" aria-labelledby="stTitle">
+      <p class="lab meta">O, 원점</p>
+      <h2 class="sr" id="stTitle">오요가의 O</h2>
+      <p class="big" id="stText">O는 동그라미이자 숫자 0, 그리고 비어 있음(空)이에요. 시작도 끝도 없는 모양, 비어 있어서 무엇이든 채울 수 있는 자리. 매트 위의 한 시간은 그 원점으로 돌아가는 연습이에요.</p>
+      <figure class="statement-fig">
+        <div class="ph reveal"><img src="../assets/film/whiteroom.jpg" alt="천창 빛이 드는 하얀 방에 서 있는 사람" loading="lazy" data-par="12"></div>
+        <figcaption>비어 있는 방, 비어 있는 시간</figcaption>
+      </figure>
+    </section>
+
+    <section class="sec week" id="week" aria-labelledby="wkTitle">
+      <div class="sec-head">
+        <span class="meta">11월 시간표</span>
+        <h2 id="wkTitle">이번 주 수업</h2>
+        <p>11월 2일부터 새 시간표예요. 수업은 앱으로 미리 예약해요.</p>
+      </div>
+      <div class="days" id="days" role="tablist" aria-label="날짜"></div>
+      <div class="wk-grid">
+        <div>
+          <ul class="rows" id="wkRows" role="tabpanel" aria-labelledby="wkTitle"></ul>
+          <div class="wk-foot">
+            <p id="wkPt"></p>
+            <div class="acts"><a class="ulink" href="schedule.html">11월 시간표 전체</a><a class="ulink" href="schedule.html#classes">수업 설명</a></div>
+          </div>
+        </div>
+        <div class="pv" aria-hidden="true">
+          <div class="pv-frame" id="pvFrame"></div>
+          <div class="pv-info"><div class="nm"><b id="pvName"></b><span id="pvEn"></span></div><p id="pvDesc"></p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="scenes" id="scenes" aria-label="서울에서 제주까지 네 장면">
+    <div class="view" id="view" data-dark>
+      <div class="fallbacks" id="fallback"><img class="fallback on" src="../assets/night/studio.jpg" alt=""><img class="fallback" src="../assets/night/circle.jpg" alt="" loading="lazy"><img class="fallback" src="../assets/night/forest.jpg" alt="" loading="lazy"><img class="fallback" src="../assets/night/pavilion.jpg" alt="" loading="lazy"></div>
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <div class="shade"></div>
+      <div class="scene-txt" data-i="0"><span class="meta">Seoul, Aeogae 37.55°N</span><h2 class="t">Seoul</h2><p class="k">애오개, 매일의 원점</p><p class="d">애오개역 앞 스튜디오. 평일 아침과 저녁, 토요일 오전에 수업이 열려요.</p><a class="go ulink" href="schedule.html">11월 시간표</a></div>
+      <div class="scene-txt" data-i="1"><span class="meta">Since 2017</span><p class="t">Together</p><p class="k">같은 호흡으로</p><p class="d">열 분의 선생님과 매일의 수련자들. 처음이어도 괜찮아요.</p><a class="go ulink" href="teachers.html">선생님</a></div>
+      <div class="scene-txt" data-i="2"><span class="meta">Jeju, O-rest 33.4°N</span><p class="t">Jeju</p><p class="k">제주, 쉼의 원점</p><p class="d">삼나무 숲과 바다 사이에서 일상을 벗어나 쉬고, 수련에 깊이 머물러요.</p></div>
+      <div class="scene-txt" data-i="3"><span class="meta">Teacher training 11.08–11.22</span><p class="t">Retreat</p><p class="k">14박 15일, 제주 리트릿 TTC</p><p class="d">요가 철학과 해부학, 명상과 티칭을 함께 살며 배우는 200시간이에요.</p><a class="go ulink" href="academy.html">지도자 과정</a></div>
+      <div class="hud">
+        <span class="n" id="hudN" aria-hidden="true">01 / 04</span><span class="bar" aria-hidden="true"><i id="hudBar"></i></span><span class="hint" id="hudHint" aria-hidden="true">스크롤해서 제주까지</span>
+        <button class="snd" id="snd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 12c2.2 0 2.2-3 4.4-3s2.2 3 4.4 3 2.2-3 4.4-3 2.2 3 4.4 3"/><path class="wv" d="M2 17c2.2 0 2.2-3 4.4-3s2.2 3 4.4 3 2.2-3 4.4-3 2.2 3 4.4 3"/></svg><span class="lbl">파도 소리</span><span class="sr" id="sndState">꺼짐</span></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="paper cover">
+    <section class="sec" id="teachers" aria-labelledby="teTitle">
+      <div class="sec-head">
+        <span class="meta" id="teCount">Teachers</span>
+        <h2 id="teTitle">선생님</h2>
+        <p>11월 시간표에 함께하는 분들이에요. 이름 옆은 이번 달 수업하는 요일.</p>
+      </div>
+      <ul class="tidx" id="tidx"></ul>
+      <p class="t-more"><span id="tWith"></span><a class="ulink" href="teachers.html">선생님 모두 보기</a></p>
+    </section>
+
+    <section class="sec" id="journal" aria-labelledby="jrTitle">
+      <div class="sec-head">
+        <span class="meta">Journal</span>
+        <h2 id="jrTitle">이야기와 소식</h2>
+        <p>블로그에 쓴 수련 노트와 소식을 다시 정리했어요.</p>
+      </div>
+      <div class="jr">
+        <a class="feat" id="feat" href="story.html?s=silence" data-cursor="읽기"></a>
+        <div class="jside">
+          <div><h3 class="meta" id="newsTitle">11월 소식</h3><ul class="news" id="news"></ul></div>
+          <div><h3 class="meta">수련 노트</h3><ul class="mini" id="mini"></ul></div>
+        </div>
+      </div>
+      <div class="j-acts acts"><a class="ulink" href="journal.html">이야기 전체</a><a class="ulink" href="https://blog.naver.com/ojyyoga">블로그 원문</a></div>
+    </section>
+
+    <section class="band" id="first" data-dark data-dock-stop aria-labelledby="ctaTitle">
+      <div class="band-in">
+        <div class="band-txt" data-rise>
+          <span class="meta">First class</span>
+          <h2 id="ctaTitle"><span class="line-mask"><span>첫 수업은,</span></span><span class="line-mask"><span>가볍게.</span></span></h2>
+          <p>요가를 처음 하는 분도, 계속 해 온 분도 누구나 참여해요. 1회 체험 뒤 등록하면 체험비는 빼 드려요.</p>
+          <div class="acts">
+            <a class="pill pill-light" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615" data-cursor="예약">체험 수업 예약</a>
+            <a class="ulink" href="https://pf.kakao.com/_RxlsDxl">카카오톡으로 묻기</a>
+          </div>
+        </div>
+        <figure class="band-fig">
+          <div class="ph reveal"><img src="../assets/blog/sit.jpg" alt="어두운 스튜디오에서 눈을 감고 앉은 수강생들" loading="lazy" data-par="10"></div>
+          <figcaption>아현동 오요가 스튜디오</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-grid">
+        <div><span class="meta">Studio</span>서울 마포구 굴레방로1길 25,<br>애오개 아이파크 상가 214호<br>5호선 애오개역</div>
+        <div><span class="meta">Contact</span><a href="tel:01087155501">010-8715-5501</a><br><a href="https://pf.kakao.com/_RxlsDxl">카카오톡 채널</a></div>
+        <div class="foot-links"><span class="meta">Pages</span><a href="schedule.html">시간표</a><a href="teachers.html">선생님</a><a href="academy.html">지도자 과정</a><a href="journal.html">이야기</a></div>
+        <div class="foot-links"><span class="meta">Follow</span><a href="https://www.instagram.com/o_yoga_studio/">Instagram</a><a href="https://blog.naver.com/ojyyoga">Naver Blog</a></div>
+      </div>
+      <p class="giant" aria-hidden="true">O-yoga</p>
+    </footer>
+  </div>
+</main>
+
+<div class="dock" id="dock"><a class="pill pill-ink" id="dockBook" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615"><span class="dot" aria-hidden="true"></span><span>체험 수업 예약</span></a></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  const S = OYS, D = S.D, img = S.img, now = S.seoulNow();
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- 서울 시각과 다음 수업 ---------- */
+  const fmt = new Intl.DateTimeFormat("ko-KR", { timeZone: "Asia/Seoul", hour: "2-digit", minute: "2-digit", hour12: false });
+  const tick = () => { $("clock").textContent = "서울 " + (new URLSearchParams(location.search).get("t") || fmt.format(new Date())); };
+  tick(); setInterval(tick, 15000);
+  const nx = S.nextClass(now);
+  if (nx) {
+    $("next").querySelector(".k").textContent = nx.live ? "지금 수업 중" : "다음 수업";
+    $("next").querySelector(".v").textContent = `${nx.live ? "" : S.whenWord(nx.i, nx.date) + " "}${nx.c.t} ${nx.c.n}, ${nx.c.w} 선생님`;
+  }
+
+  /* ---------- 이번 주 수업: 오늘부터 수업이 있는 6일 ---------- */
+  const days = S.weekDays(6, now.date);
+  const tabs = $("days"), rows = $("wkRows"), frame = $("pvFrame");
+  const shown = new Map();
+  Object.entries(D.CLASSES).forEach(([n, c]) => { const im = new Image(); im.alt = ""; im.loading = "lazy"; im.src = img(c.img); frame.appendChild(im); shown.set(n, im); });
+  let cur = null;
+  function setClass(n) {
+    if (n === cur) return;
+    frame.querySelectorAll("img").forEach((im) => { im.classList.toggle("was", im === shown.get(cur)); im.classList.toggle("on", im === shown.get(n)); if (im !== shown.get(n) && im !== shown.get(cur)) im.classList.remove("was"); });
+    rows.querySelectorAll(".row").forEach((r) => r.setAttribute("aria-current", String(r.dataset.n === n && r.dataset.k === rows.dataset.focus)));
+    cur = n;
+    $("pvName").textContent = n; $("pvEn").textContent = D.CLASSES[n].en; $("pvDesc").textContent = D.CLASSES[n].desc;
+  }
+  tabs.innerHTML = days.map(({ date, i }, k) => `<button class="day${i === 0 ? " is-today" : ""}" type="button" role="tab" id="tab${k}" aria-selected="false" aria-controls="wkRows" aria-label="${S.mdKo(date)} ${S.DOW[S.dow(date)]}요일${i === 0 ? ", 오늘" : ""}"><b>${S.DOW[S.dow(date)]}</b><span>${Number(date.slice(8))}</span></button>`).join("");
+  function pick(k) {
+    const { date, i } = days[k], { list, off } = S.classesOn(date);
+    tabs.querySelectorAll(".day").forEach((b, j) => { b.setAttribute("aria-selected", String(j === k)); b.tabIndex = j === k ? 0 : -1; });
+    rows.setAttribute("aria-labelledby", "tab" + k);
+    if (!list.length) { rows.innerHTML = `<li class="row-empty"><b>${off === "holiday" ? "이날은 쉬어요." : "아직 시간표가 없어요."}</b></li>`; return; }
+    const nextT = i === 0 && nx && nx.i === 0 ? nx.c.t : null;
+    rows.innerHTML = list.map((c, j) => {
+      const past = i === 0 && now.min >= S.toMin(c.t) + c.len;
+      const live = nextT === c.t;
+      const x = [live ? (nx.live ? "지금 수업 중" : "다음 수업") : "", c.note, c.len !== 60 ? `${c.len}분` : "", c.orig ? `${c.orig} 선생님 대강` : ""].filter(Boolean).join(", ");
+      return `<li><button class="row${past ? " past" : ""}" type="button" data-n="${c.n}" data-k="${j}" aria-expanded="false"><span class="t">${c.t}</span><span class="n">${c.n}</span><span class="w">${c.w}</span>${x ? `<span class="x">${x}</span>` : ""}</button>
+        <div class="inline"><div class="ph"><img src="${img(D.CLASSES[c.n].img)}" alt="" loading="lazy"></div><p>${D.CLASSES[c.n].desc}</p></div></li>`;
+    }).join("");
+    const first = list.findIndex((c) => !(i === 0 && now.min >= S.toMin(c.t) + c.len));
+    rows.dataset.focus = String(Math.max(0, first));
+    cur = null; setClass(list[Math.max(0, first)].n);
+    rows.querySelectorAll(".row").forEach((r) => {
+      const hover = () => { if (!S.desktop.matches) return; rows.dataset.focus = r.dataset.k; cur = null; setClass(r.dataset.n); };
+      r.addEventListener("mouseenter", hover); r.addEventListener("focus", hover);
+      r.addEventListener("click", () => {
+        if (S.desktop.matches) { hover(); return; }
+        const box = r.nextElementSibling, open = !box.classList.contains("open");
+        rows.querySelectorAll(".inline").forEach((b) => b.classList.remove("open"));
+        rows.querySelectorAll(".row").forEach((x) => x.setAttribute("aria-expanded", "false"));
+        box.classList.toggle("open", open); r.setAttribute("aria-expanded", String(open));
+      });
+    });
+  }
+  tabs.querySelectorAll(".day").forEach((b, k) => {
+    b.addEventListener("click", () => pick(k));
+    b.addEventListener("keydown", (e) => { const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!d) return; e.preventDefault(); const n = (k + d + days.length) % days.length; pick(n); tabs.children[n].focus(); });
+  });
+  pick(0);
+  $("wkPt").textContent = D.SCHEDULE.pt;
+
+  /* ---------- 선생님: 이름 목록과 커서를 따라오는 얼굴 ---------- */
+  const main = D.TEACHERS.filter((t) => !t.group), withT = D.TEACHERS.filter((t) => t.group);
+  $("teCount").textContent = `Teachers ${String(main.length).padStart(2, "0")}`;
+  $("tidx").innerHTML = main.map((t) => { const m = S.monthOf(t.n); return `<li><a class="tl" href="teachers.html#${t.id}" data-img="${t.img ? img(t.img) : ""}"><b>${t.n}</b><span class="cl">${m.names.join(", ") || t.role || ""}</span><span class="tm">${m.days.join(" ")}</span></a></li>`; }).join("");
+  $("tWith").textContent = `지도자 과정과 대강으로 ${withT.map((t) => t.n).join(", ")} 선생님이 함께해요.`;
+  S.floatImages($("tidx"), ".tl", (el) => el.dataset.img);
+
+  /* ---------- 이야기와 소식 ---------- */
+  const st = D.STORIES.silence;
+  $("feat").innerHTML = `<div class="ph reveal"><img src="${img(st.img)}" alt="제주 숲속 정자에서 명상하는 지도자 과정 수련생들" loading="lazy" data-par="8"></div>
+    <p class="m"><span>${st.cat}</span><span>${S.ymd(st.date)}</span><span>${st.read}분</span></p>
+    <h3>${st.title}<small>${st.sub}</small></h3><p>${st.lead}</p>`;
+  const ds = (n) => n.until ? `${S.md(n.d)}–<br>${S.md(n.until)}` : S.md(n.d);
+  $("news").innerHTML = D.SCHEDULE.notices.map((n) => `<li><a href="${n.href}"><span class="d">${ds(n)}</span><b>${n.t}</b><span>${n.body}</span></a></li>`).join("");
+  $("mini").innerHTML = ["awareness", "rhythm"].map((k) => { const s = D.STORIES[k]; return `<li><a href="story.html?s=${k}"><div class="ph"><img src="${img(s.img)}" alt="" loading="lazy"></div><div><b>${s.title}</b><span>${s.sub}</span></div></a></li>`; }).join("");
+
+  /* ---------- 장면: 서울 → 제주, 물결 잡음으로 녹아 넘어간다 (D) ---------- */
+  const SRC = ["night/studio", "night/circle", "night/forest", "night/pavilion"].map(img), N = SRC.length;
+  const sc = $("scenes"), view = $("view"), txts = [...view.querySelectorAll(".scene-txt")];
+  const topBook = $("topBook"), dockBook = $("dockBook"), fbs = [...view.querySelectorAll(".fallback")];
+  let draw = null;
+  if (S.reduce) {
+    sc.classList.add("static");
+    const stack = document.createElement("div"); stack.className = "stack";
+    txts.forEach((t, i) => { const f = document.createElement("figure"); f.innerHTML = `<img src="${SRC[i]}" alt="" loading="lazy">`; f.appendChild(t); stack.appendChild(f); });
+    view.appendChild(stack);
+  } else {
+    const cv = $("gl"), gl = cv.getContext("webgl", { antialias: false, alpha: false });
+    if (gl) {
+      const vs = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
+      const fs = `precision highp float;varying vec2 v;uniform sampler2D a,b;uniform vec2 res,ra,rb,mouse;uniform float prog,time,vel;
+        float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+        float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}
+        float fbm(vec2 p){float s=0.,q=.5;for(int i=0;i<5;i++){s+=q*n(p);p*=2.02;q*=.5;}return s;}
+        vec2 cover(vec2 uv,vec2 r){float rs=res.x/res.y,ri=r.x/r.y;vec2 s=rs>ri?vec2(1.,ri/rs):vec2(rs/ri,1.);return (uv-.5)*s+.5;}
+        void main(){
+          vec2 uv=vec2(v.x,1.-v.y);
+          vec2 asp=vec2(res.x/res.y,1.);
+          vec2 dm=(uv-mouse)*asp; float dd=length(dm);
+          uv+=normalize(dm+1e-5)*sin(dd*38.-time*4.)*.006*exp(-dd*5.)*(.35+vel);
+          float nz=fbm(uv*2.6+vec2(0.,time*.03));
+          float p=smoothstep(.0,1.,prog);
+          float edge=smoothstep(nz-.22,nz+.22,p*1.44-.22);
+          vec2 ua=uv+(nz-.5)*.22*p, ub=uv-(nz-.5)*.22*(1.-p);
+          ua=(ua-.5)/(1.06+.04*p)+.5; ub=(ub-.5)/(1.1-.04*p)+.5;
+          vec3 ca=texture2D(a,cover(ua,ra)).rgb, cb=texture2D(b,cover(ub,rb)).rgb;
+          vec3 c=mix(ca,cb,edge);
+          float glow=smoothstep(.0,.5,edge)*smoothstep(1.,.5,edge);
+          c+=vec3(.55,.62,.6)*glow*.18;
+          float vg=smoothstep(1.3,.35,length((v-.5)*vec2(1.2,1.)));
+          c*=mix(.7,1.,vg);
+          gl_FragColor=vec4(c,1.);
+        }`;
+      const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
+      const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+      if (gl.getProgramParameter(pr, gl.LINK_STATUS)) {
+        gl.useProgram(pr);
+        const bf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+        const lc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lc); gl.vertexAttribPointer(lc, 2, gl.FLOAT, false, 0, 0);
+        const U = ["a", "b", "res", "ra", "rb", "mouse", "prog", "time", "vel"].reduce((o, k) => (o[k] = gl.getUniformLocation(pr, k), o), {});
+        gl.uniform1i(U.a, 0); gl.uniform1i(U.b, 1);
+        const tex = [], dims = []; let ready = 0;
+        SRC.forEach((s, i) => {
+          const im = new Image(); im.src = s;
+          im.onload = () => {
+            const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+            ["TEXTURE_MIN_FILTER", "TEXTURE_MAG_FILTER"].forEach((k) => gl.texParameteri(gl.TEXTURE_2D, gl[k], gl.LINEAR));
+            ["TEXTURE_WRAP_S", "TEXTURE_WRAP_T"].forEach((k) => gl.texParameteri(gl.TEXTURE_2D, gl[k], gl.CLAMP_TO_EDGE));
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, im);
+            tex[i] = t; dims[i] = [im.naturalWidth, im.naturalHeight];
+            if (++ready === N) $("fallback").style.opacity = 0;
+          };
+        });
+        const size = () => { const d = Math.min(devicePixelRatio || 1, 1.5); cv.width = cv.clientWidth * d; cv.height = cv.clientHeight * d; gl.viewport(0, 0, cv.width, cv.height); gl.uniform2f(U.res, cv.width, cv.height); };
+        size(); addEventListener("resize", size);
+        let mx = 0.5, my = 0.5, sx = 0.5, sy = 0.5, vel = 0; const t0 = performance.now();
+        addEventListener("pointermove", (e) => { const a = e.clientX / innerWidth, b = e.clientY / innerHeight; vel = Math.min(1, vel + Math.hypot(a - mx, b - my) * 6); mx = a; my = b; });
+        draw = (i, p, t) => {
+          if (ready < N) return;
+          const j = Math.min(N - 1, i + 1);
+          gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex[i]);
+          gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, tex[j]);
+          gl.uniform2f(U.ra, ...dims[i]); gl.uniform2f(U.rb, ...dims[j]);
+          sx += (mx - sx) * 0.08; sy += (my - sy) * 0.08; vel *= 0.94;
+          gl.uniform2f(U.mouse, sx, sy); gl.uniform1f(U.vel, vel); gl.uniform1f(U.prog, p); gl.uniform1f(U.time, (t - t0) / 1000);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+        };
+      }
+    }
+  }
+  let P = 0, shownP = 0;
+  const hold = (f) => { const x = Math.max(0, Math.min(1, (f - 0.3) / 0.4)); return x * x * (3 - 2 * x); }; // 장면마다 머물다가 가운데서 넘어간다
+  const state = (pp) => { const f = pp * (N - 1), i = Math.min(N - 2, Math.floor(f)); return { i, t: pp >= 1 ? 1 : hold(f - i), f }; };
+  function ui(s) {
+    txts.forEach((el, j) => {
+      let o = 0, y = 0;
+      if (j === s.i) { o = 1 - Math.min(1, s.t * 2.2); y = -24 * s.t; }
+      if (j === s.i + 1) { o = Math.max(0, (s.t - 0.55) / 0.45); y = 24 * (1 - o); }
+      el.style.opacity = o.toFixed(3); el.style.transform = `translateY(${y.toFixed(1)}px)`;
+      el.querySelectorAll("a").forEach((a) => { a.tabIndex = o > 0.5 ? 0 : -1; });
+    });
+    const k = s.t > 0.5 ? s.i + 1 : s.i;
+    if (!draw && k !== ui.k) { ui.k = k; fbs.forEach((im, j) => im.classList.toggle("on", j === k)); }
+    $("hudN").textContent = `${String(k + 1).padStart(2, "0")} / ${String(N).padStart(2, "0")}`;
+    $("hudBar").style.width = (s.f / (N - 1) * 100).toFixed(1) + "%";
+    $("hudHint").textContent = k >= N - 1 ? "아래로 계속" : k >= 2 ? "제주, O-rest" : "스크롤해서 제주까지";
+    const r = sc.getBoundingClientRect(), pinned = r.top <= 1 && r.bottom > innerHeight * 1.5;
+    const jeju = pinned && k >= 2; // 제주 장면에서는 예약 대신 상담
+    if (jeju !== ui.jeju) {
+      ui.jeju = jeju;
+      [topBook, dockBook].forEach((b) => { b.href = jeju ? D.LINKS.talk : D.LINKS.book; (b.querySelector("span:last-child") || b).textContent = jeju ? "제주 과정 상담" : "체험 수업 예약"; });
+    }
+  }
+  ui(state(0));
+  if (!S.reduce) {
+    (function loop(t) {
+      shownP += (P - shownP) * 0.1;
+      const r = sc.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) { const s = state(shownP); ui(s); if (draw) draw(s.i, s.t, t); }
+      requestAnimationFrame(loop);
+    })(performance.now());
+  }
+
+  /* 파도 소리 (켤 때만) */
+  let ac = null, master = null;
+  function ocean() {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    const len = ac.sampleRate * 6, buf = ac.createBuffer(2, len, ac.sampleRate);
+    for (let ch = 0; ch < 2; ch++) { const d = buf.getChannelData(ch); let last = 0; for (let i = 0; i < len; i++) { last = (last + 0.02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.2; } }
+    const src = ac.createBufferSource(); src.buffer = buf; src.loop = true;
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 650;
+    const swell = ac.createGain(); swell.gain.value = 0.55;
+    const lfo = ac.createOscillator(); lfo.frequency.value = 0.09;
+    const la = ac.createGain(); la.gain.value = 0.42; lfo.connect(la); la.connect(swell.gain);
+    const lf = ac.createGain(); lf.gain.value = 380; lfo.connect(lf); lf.connect(lp.frequency);
+    master = ac.createGain(); master.gain.value = 0;
+    src.connect(lp); lp.connect(swell); swell.connect(master); master.connect(ac.destination); src.start(); lfo.start();
+  }
+  $("snd").addEventListener("click", async () => {
+    const b = $("snd"), on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", String(on)); $("sndState").textContent = on ? "켜짐" : "꺼짐";
+    if (on) { if (!ac) ocean(); await ac.resume(); master.gain.setTargetAtTime(0.5, ac.currentTime, 0.8); } else if (ac) master.gain.setTargetAtTime(0, ac.currentTime, 0.3);
+  });
+
+  /* ---------- 여는 화면: 처음 들어올 때만 사진이 불러와지는 만큼 로고가 한 줄로 그려지고, 다 그리면 열린다 ---------- */
+  const loader = $("loader");
+  loader.insertAdjacentHTML("afterbegin", S.markSVG("ld-mark"));
+  const mk = loader.querySelector(".ld-mark"), dest = document.querySelector(".top .mark");
+  let seen = false; try { seen = !!sessionStorage.getItem("oy-home"); sessionStorage.setItem("oy-home", "1"); } catch (e) { /* 저장소 없음 */ }
+  const viaVeil = document.documentElement.classList.contains("veil-in");
+  S.fogGL($("heroGL"), $("heroImg"), $("heroMedia"));
+  S.start({ intro: false });
+  let introDone = false;
+  function heroLines(delay) {
+    if (!window.gsap) return;
+    gsap.from(".hero h1 .line-mask > span", { yPercent: 110, duration: 1.3, ease: "expo.out", stagger: 0.1, delay, clearProps: "transform" });
+    gsap.from(".hero .fade-in", { autoAlpha: 0, y: 14, duration: 1, ease: "power3.out", stagger: 0.08, delay: delay + 0.3, clearProps: "all" });
+    setTimeout(() => document.querySelectorAll(".hero h1 .line-mask > span, .hero .fade-in").forEach((el) => { el.style.cssText = ""; }), (delay + 2.4) * 1000);
+  }
+  function intro() {
+    if (introDone) return; introDone = true;
+    document.body.classList.remove("lock");
+    if (S.reduce || !window.gsap) { loader.remove(); S.refresh(); return; }
+    S.drawMark(mk, 1);
+    // 다 그린 로고가 머리의 제자리로 날아가 앉는 동안, 그 뒤에서 히어로가 원으로 열린다
+    const a = mk.getBoundingClientRect(), b = dest.getBoundingClientRect();
+    const fly = { x: b.left + b.width / 2 - (a.left + a.width / 2), y: b.top + b.height / 2 - (a.top + a.height / 2), scale: b.width / a.width };
+    const land = () => gsap.set(dest, { clearProps: "opacity,visibility" });
+    gsap.set(dest, { autoAlpha: 0 });
+    gsap.set("#heroSticky", { clipPath: "circle(0px at 50% 50%)" });
+    const tl = gsap.timeline({ onComplete: () => { loader.remove(); land(); gsap.set("#heroSticky", { clearProps: "clipPath" }); S.refresh(); } });
+    tl.set(loader, { background: "transparent" }, 0)
+      .to(".loader .cap", { autoAlpha: 0, duration: 0.45 }, 0)
+      .to("#heroSticky", { clipPath: "circle(125% at 50% 50%)", duration: 1.6, ease: "expo.inOut" }, 0.1)
+      .fromTo("#heroImg, #heroGL", { scale: 1.3 }, { scale: 1, duration: 2.4, ease: "expo.out" }, 0.1)
+      // 원이 로고를 다 덮을 즈음(0.55초) 희게 바뀌고, 그다음에 떠난다. 그래서 종이 위에 흰 로고가 남는 순간이 없다
+      .to(mk, { color: "#F6F4EF", duration: 0.3, ease: "power1.inOut" }, 0.42)
+      .to(mk, { ...fly, duration: 1.1, ease: "power3.inOut" }, 0.55)
+      .add(land, 1.65)
+      .set(mk, { autoAlpha: 0 }, 1.65)
+      .from(".top-in > :not(.wordmark), .wordmark b", { autoAlpha: 0, y: -12, duration: 1, ease: "power3.out", stagger: 0.06, clearProps: "all" }, 1.3);
+    heroLines(0.95);
+    setTimeout(() => { if (loader.isConnected) loader.remove(); land(); document.getElementById("heroSticky").style.clipPath = ""; S.refresh(); }, 4200);
+  }
+  if (S.reduce || seen || viaVeil) { // 다시 들어오면 고리를 건너뛴다
+    loader.remove(); document.body.classList.remove("lock"); introDone = true; S.refresh();
+    if (!S.reduce) heroLines(viaVeil ? 0.5 : 0.1);
+  } else {
+    const need = [$("heroImg"), ...document.querySelectorAll(".statement img")];
+    let loaded = 0, shownPct = 0;
+    need.forEach((im) => (im.complete && im.naturalWidth) ? loaded++ : (im.addEventListener("load", () => loaded++, { once: true }), im.addEventListener("error", () => loaded++, { once: true })));
+    const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+    setTimeout(intro, 5000); // 느린 연결에서도 5초 넘게 기다리게 하지 않는다
+    let last = performance.now();
+    (function progress(now = performance.now()) { // 펜이 너무 빨리 지나가지 않게 60프레임 기준 한 번에 1.1%까지만 (적어도 1.5초)
+      if (introDone) return;
+      const k = Math.min(3, (now - last) / 16.7); last = now;
+      const target = Math.min(100, Math.round(loaded / need.length * 100));
+      shownPct = Math.min(shownPct + Math.min((target - shownPct) * 0.12 + 0.4, 1.1) * k, target === 100 ? 100 : target - 0.01);
+      S.drawMark(mk, shownPct / 100);
+      if (shownPct >= 99.9) fonts.then(() => setTimeout(intro, 260)); else requestAnimationFrame(progress);
+    })();
+  }
+
+  if (S.reduce || !window.gsap) return;
+  /* 히어로: 다음 장이 종이처럼 덮으며 올라오고, 사진은 살짝 물러난다 */
+  gsap.to("#heroMedia", { scale: 1.08, yPercent: 6, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".hero-copy", { yPercent: -18, autoAlpha: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "70% top", scrub: true } });
+  /* 문장: 읽는 속도에 맞춰 한 단어씩 또렷해진다 */
+  const stx = $("stText");
+  stx.innerHTML = stx.textContent.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ");
+  const words = stx.querySelectorAll(".w");
+  ScrollTrigger.create({ trigger: stx, start: "top 78%", end: "bottom 42%", scrub: true, onUpdate: (s) => { const k = s.progress * words.length; words.forEach((w, i) => { w.style.opacity = Math.max(0.16, Math.min(1, k - i + 0.4)); }); } });
+  /* 장면: 작은 원으로 떠올라 화면 전체로 열리고, 머무는 동안 네 장면이 넘어간다 */
+  gsap.fromTo(view, { clipPath: "circle(17vmin at 50% 50%)" }, { clipPath: "circle(75vmax at 50% 50%)", ease: "none", scrollTrigger: { trigger: sc, start: "top bottom", end: "top top", scrub: true } });
+  ScrollTrigger.create({ trigger: sc, start: "top top", end: () => "+=" + Math.max(1, sc.offsetHeight - 2 * innerHeight), invalidateOnRefresh: true, onUpdate: (s) => { P = s.progress; } });
+})();
+</script>
+</body>
+</html>

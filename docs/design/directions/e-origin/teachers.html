@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>선생님 — 시안 E · 오요가</title>
+<meta name="description" content="오요가 선생님 소개와 이번 달 수업 시간.">
+<script>try { if (sessionStorage.getItem("oy-veil")) document.documentElement.classList.add("veil-in"); } catch (e) {}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<link rel="icon" type="image/png" href="../../../../images/favicon.png">
+<link rel="apple-touch-icon" href="../../../../images/webclip.png">
+<style>
+.tp { display: grid; gap: 0; }
+.idx { display: none; }
+@media (min-width: 900px) {
+  .tp { grid-template-columns: 2fr 10fr; gap: 24px; align-items: start; }
+  .idx { display: grid; position: sticky; top: calc(var(--top) + 32px); gap: 0; }
+  .idx h2 { margin-bottom: 10px; color: var(--mute); }
+  .idx a { display: flex; align-items: center; min-height: 34px; font-family: var(--kr); font-size: 17px; color: var(--mute); transition: color .3s, transform .5s var(--ease); }
+  .idx a:hover { color: var(--ink); }
+  .idx a[aria-current="true"] { color: var(--ink); transform: translateX(10px); }
+  .idx .gap { height: 18px; }
+}
+.grp { display: grid; gap: 0; }
+.grp + .grp { margin-top: clamp(96px, 11vw, 160px); }
+.grp > h2 { padding-top: 22px; border-top: 1px solid var(--ink); margin-bottom: 8px; font-family: var(--kr); font-weight: 400; font-size: clamp(28px, 3vw, 44px); letter-spacing: -.02em; }
+.grp > p { color: var(--mute); margin-bottom: 24px; max-width: 32em; }
+.prof { display: grid; gap: 20px; padding: 36px 0 44px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--top) + 24px); }
+.prof .ph { width: min(78%, 360px); aspect-ratio: 4 / 5; }
+.prof .txt { display: grid; gap: 14px; align-content: start; }
+.prof h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; font-family: var(--kr); font-weight: 300; font-size: clamp(44px, 5vw, 76px); letter-spacing: -.035em; line-height: 1.05; }
+.prof h3 small { font-family: var(--sans); font-size: 14px; letter-spacing: 0; color: var(--mute); font-weight: 400; }
+.prof blockquote { font-family: var(--kr); font-weight: 300; font-size: clamp(20px, 1.9vw, 26px); line-height: 1.6; max-width: 22em; }
+.prof blockquote::before { content: "“"; } .prof blockquote::after { content: "”"; }
+.prof .none { font-size: 15px; color: var(--mute); }
+.slots { display: grid; gap: 0; margin-top: 6px; max-width: 30em; }
+.slots li { display: grid; grid-template-columns: 26px 70px 1fr auto; gap: 0 10px; align-items: baseline; padding: 9px 0; border-top: 1px solid var(--line); }
+.slots li:last-child { border-bottom: 1px solid var(--line); }
+.slots .dw { font-family: var(--kr); font-size: 16px; }
+.slots .t { font-family: var(--lat); font-size: 19px; font-variant-numeric: tabular-nums; }
+.slots b { font-family: var(--kr); font-weight: 400; font-size: 17px; }
+.slots .x { font-size: 13px; color: var(--mute); text-align: right; white-space: nowrap; }
+.slots-h { font-size: 13px; color: var(--mute); margin-top: 8px; }
+.prof .acts { margin-top: 4px; }
+@media (min-width: 900px) {
+  .prof { grid-template-columns: 4fr 6fr; gap: 0 5vw; align-items: start; padding: 48px 0 56px; }
+  .prof .ph { width: 100%; }
+  .prof.no-ph .txt { grid-column: 2; }
+}
+</style>
+</head>
+<body data-page="teachers" data-top="paper">
+<a class="sr" href="#main">본문 바로가기</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="veil" aria-hidden="true"><i></i></div>
+
+<header class="top on-paper" id="top">
+  <div class="top-in">
+    <a class="wordmark" href="index.html" aria-label="오요가 처음으로"><i class="mark" aria-hidden="true"></i><b>O-yoga</b></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="schedule.html" data-nav="schedule">시간표</a>
+      <a href="teachers.html" data-nav="teachers">선생님</a>
+      <a href="academy.html" data-nav="academy">지도자 과정</a>
+      <a href="journal.html" data-nav="journal">이야기</a>
+    </nav>
+    <div class="top-right">
+      <a class="pill pill-light top-book" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="메뉴 열기"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9h18M3 15h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="전체 메뉴">
+  <button class="close" id="menuClose" type="button" aria-label="메뉴 닫기"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 5l12 12M17 5L5 17"/></svg></button>
+  <span class="wordmark menu-mark" aria-hidden="true"><i class="mark"></i><b>O-yoga</b></span>
+  <a href="index.html" data-nav="home">처음</a>
+  <a href="schedule.html" data-nav="schedule">시간표</a>
+  <a href="teachers.html" data-nav="teachers">선생님</a>
+  <a href="academy.html" data-nav="academy">지도자 과정</a>
+  <a href="journal.html" data-nav="journal">이야기</a>
+  <div class="sub">
+    <a href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615">체험 수업 예약</a>
+    <a href="https://pf.kakao.com/_RxlsDxl">카카오톡으로 묻기</a>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="phead" data-intro>
+    <span class="meta" id="count">Teachers</span>
+    <h1><span class="line-mask"><span>선생님</span></span></h1>
+    <div class="side"><a class="ulink" href="schedule.html">11월 시간표</a></div>
+    <p class="lead">각자의 문장으로 수련을 안내해요. 이번 달 수업 시간은 시간표에서 바로 가져와요.</p>
+  </header>
+
+  <div class="sec tp">
+    <nav class="idx" id="idx" aria-label="선생님 이름"></nav>
+    <div>
+      <section class="grp" aria-labelledby="g1"><h2 id="g1">11월에 만나는 선생님</h2><p>평일과 토요일 정규 수업을 이끄는 분들이에요.</p><div id="main1"></div></section>
+      <section class="grp" id="with" aria-labelledby="g2"><h2 id="g2">지도자 과정과 대강</h2><p>지도자 과정의 철학 수업과, 찬드라 선생님이 제주에 있는 동안의 수업을 맡아요.</p><div id="main2"></div></section>
+    </div>
+  </div>
+
+  <section class="band" data-dark data-dock-stop aria-labelledby="ctaTitle">
+    <div class="band-in">
+      <div class="band-txt" data-rise>
+        <span class="meta">First class</span>
+        <h2 id="ctaTitle"><span class="line-mask"><span>마음이 가는</span></span><span class="line-mask"><span>선생님의 수업부터.</span></span></h2>
+        <p>1회 체험으로 먼저 들어 보세요. 체험 뒤 등록하면 체험비는 빼 드려요.</p>
+        <div class="acts">
+          <a class="pill pill-light" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615" data-cursor="예약">체험 수업 예약</a>
+          <a class="ulink" href="schedule.html">11월 시간표</a>
+        </div>
+      </div>
+      <figure class="band-fig">
+        <div class="ph reveal"><img src="../assets/film/assist.jpg" alt="선생님이 수강생의 자세를 손으로 잡아 주는 모습" loading="lazy" data-par="10"></div>
+        <figcaption>핸즈온, 애오개 스튜디오</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-grid">
+      <div><span class="meta">Studio</span>서울 마포구 굴레방로1길 25,<br>애오개 아이파크 상가 214호<br>5호선 애오개역</div>
+      <div><span class="meta">Contact</span><a href="tel:01087155501">010-8715-5501</a><br><a href="https://pf.kakao.com/_RxlsDxl">카카오톡 채널</a></div>
+      <div class="foot-links"><span class="meta">Pages</span><a href="schedule.html">시간표</a><a href="teachers.html">선생님</a><a href="academy.html">지도자 과정</a><a href="journal.html">이야기</a></div>
+      <div class="foot-links"><span class="meta">Follow</span><a href="https://www.instagram.com/o_yoga_studio/">Instagram</a><a href="https://blog.naver.com/ojyyoga">Naver Blog</a></div>
+    </div>
+    <p class="giant" aria-hidden="true">O-yoga</p>
+  </footer>
+</main>
+
+<div class="dock" id="dock"><a class="pill pill-ink" href="https://m.booking.naver.com/booking/6/bizes/957774/items/5238615"><span class="dot" aria-hidden="true"></span><span>체험 수업 예약</span></a></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  const S = OYS, D = S.D, img = S.img, $ = (id) => document.getElementById(id);
+  const end = (c) => S.fromMin(S.toMin(c.t) + c.len);
+  $("count").textContent = `Teachers ${String(D.TEACHERS.length).padStart(2, "0")}`;
+
+  function profile(t) {
+    const wk = S.weeklyOf(t.n);
+    const rows = wk.map((s) => {
+      const sat = s.dw === 6, subOf = D.SUBS.find((x) => x.who === t.n);
+      const away = D.SUBS.some((x) => x.dow === s.dw && D.WEEK[s.dw].some((c) => c.w === t.n && c.t === s.t)); // 대강 뒤에 돌아오는 수업
+      const x = sat ? s.dates.map(S.md).join(", ") : subOf ? `${S.md(s.dates[0])}–${S.md(s.dates[s.dates.length - 1])}` : away ? `${S.md(s.dates[0])}부터` : (s.len !== 60 ? `${s.len}분` : "");
+      return `<li><span class="dw">${S.DOW[s.dw]}</span><span class="t">${s.t}</span><b>${s.n}</b><span class="x">${x}</span></li>`;
+    }).join("");
+    const subNote = (() => { // 대강으로 빠지는 날을 알려 준다
+      const subs = D.SUBS.filter((x) => D.WEEK[x.dow].some((c) => c.w === t.n && (x.after ? S.toMin(c.t) >= S.toMin(x.after) : S.toMin(c.t) < S.toMin(x.before))));
+      return subs.length ? `<p class="slots-h">${S.md(subs[0].until)}까지는 제주 지도자 과정 일정으로 ${subs.map((x) => `${S.DOW[x.dow]}요일 ${x.after ? "저녁" : "오전"} 수업을 ${x.who} 선생님`).join(", ")}이 이끌어요.</p>` : "";
+    })();
+    const meta = [t.role].filter(Boolean).join(", ");
+    return `<article class="prof${t.img ? "" : " no-ph"}" id="${t.id}">
+      ${t.img ? `<div class="ph reveal"><img src="${img(t.img)}" alt="${t.n} 선생님" loading="lazy" data-par="8"></div>` : ""}
+      <div class="txt">
+        <h3>${t.n}${meta ? `<small>${meta}</small>` : ""}</h3>
+        ${t.q ? `<blockquote>${t.q}</blockquote>` : `<p class="none">소개 글을 준비하고 있어요.</p>`}
+        ${rows ? `<p class="slots-h">11월 수업</p><ul class="slots">${rows}</ul>` : ""}
+        ${subNote}
+        <div class="acts">${rows ? `<a class="ulink" href="${D.LINKS.book}">체험 수업 예약</a>` : ""}${t.src ? `<a class="ulink" href="${D.LINKS.blog(t.src)}">블로그 소개 글</a>` : ""}</div>
+      </div>
+    </article>`;
+  }
+  const g1 = D.TEACHERS.filter((t) => !t.group), g2 = D.TEACHERS.filter((t) => t.group);
+  $("main1").innerHTML = g1.map(profile).join("");
+  $("main2").innerHTML = g2.map(profile).join("");
+  $("idx").innerHTML = `<h2 class="meta">이름</h2>` + g1.map((t) => `<a href="#${t.id}">${t.n}</a>`).join("") + `<span class="gap"></span>` + g2.map((t) => `<a href="#${t.id}">${t.n}</a>`).join("");
+
+  // 지금 보고 있는 선생님을 목록에 표시
+  const links = [...$("idx").querySelectorAll("a")];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + e.target.id))); }), { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll(".prof").forEach((p) => io.observe(p));
+
+  S.start();
+})();
+</script>
+</body>
+</html>
