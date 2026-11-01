@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "preview.oyoga.kr" }],
+      "destination": "/docs/design/directions/e-origin/index.html",
+      "permanent": false
+    }
+  ]
+}
