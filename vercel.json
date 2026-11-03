@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/about.html", "destination": "/teachers.html", "statusCode": 301 },
+    { "source": "/about", "destination": "/teachers.html", "statusCode": 301 },
+    { "source": "/programs.html", "destination": "/academy.html", "statusCode": 301 },
+    { "source": "/programs", "destination": "/academy.html", "statusCode": 301 },
+    { "source": "/programs/wellness.html", "destination": "/", "statusCode": 301 },
+    { "source": "/programs/wellness", "destination": "/", "statusCode": 301 },
+    { "source": "/programs/:slug*", "destination": "/academy.html", "statusCode": 301 },
+    { "source": "/detail_programs.html", "destination": "/academy.html", "statusCode": 301 },
+    { "source": "/detail_team-profile.html", "destination": "/teachers.html", "statusCode": 301 },
+    { "source": "/team-profiles/:slug*", "destination": "/teachers.html", "statusCode": 301 }
+  ]
+}
