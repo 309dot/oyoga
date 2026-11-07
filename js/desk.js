@@ -7,7 +7,8 @@
 
   var API = '/api/desk';
   var STORE = 'oy-desk-key';
-  var REFRESH_MS = 60000;
+  var REFRESH_MS = 5 * 60000;   // 보고 있을 때만 5분마다. 무료 DB가 쉴 틈을 준다.
+  var IDLE_MS = 30 * 60000;     // 30분 넘게 손대지 않으면 새로 부르기를 멈춘다
   var RANGES = [1, 7, 30, 90];
   var qs = new URLSearchParams(location.search);
   var TEST = qs.get('site') === 'test';
@@ -394,7 +395,7 @@
   }
 
   /* ---------- 칸마다 ---------- */
-  // 큰 숫자는 기간을 바꿀 때만 앞 숫자에서 굴러가듯 바뀐다 (1분마다 새로 부를 때는 그대로)
+  // 큰 숫자는 기간을 바꿀 때만 앞 숫자에서 굴러가듯 바뀐다 (저절로 새로 부를 때는 그대로)
   var REDUCE = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function countTo(node, to) {
     var from = node._n == null ? 0 : node._n;
@@ -420,8 +421,8 @@
 
     var lede = $('dkLede'); clear(lede);
     if (!t.visits) {
-      lede.textContent = !d.first ? '아직 다녀간 기록이 없어요. 누군가 들어오면 1분 안에 여기에 나타나요.'
-        : n === 1 ? '오늘은 아직 다녀간 기록이 없어요. 누군가 들어오면 1분 안에 여기에 나타나요.' : '이 기간에는 다녀간 기록이 없어요.';
+      lede.textContent = !d.first ? '아직 다녀간 기록이 없어요. 누군가 들어오면 몇 분 안에 여기에 나타나요.'
+        : n === 1 ? '오늘은 아직 다녀간 기록이 없어요. 누군가 들어오면 몇 분 안에 여기에 나타나요.' : '이 기간에는 다녀간 기록이 없어요.';
       return;
     }
     var top = (d.channels || [])[0];
@@ -597,7 +598,7 @@
     var box = $('boxRecent'); clear(box);
     var list = d.recent || [];
     $('p8a').textContent = list.length ? '가장 최근 페이지 뷰 ' + list.length + '개' : '';
-    if (!list.length) { var li0 = el('li', 'empty'); empty(li0, '아직 없어요', '누군가 들어오면 1분 안에 여기에 한 줄씩 적혀요. 시각, 본 페이지, 들어온 길, 머문 시간이 남아요.'); box.appendChild(li0); return; }
+    if (!list.length) { var li0 = el('li', 'empty'); empty(li0, '아직 없어요', '누군가 들어오면 몇 분 안에 여기에 한 줄씩 적혀요. 시각, 본 페이지, 들어온 길, 머문 시간이 남아요.'); box.appendChild(li0); return; }
     list.forEach(function (r) {
       var li = el('li'), k = kst(r.ts), today = k.day === d.today;
       li.appendChild(el('span', 'tm', (today ? '' : (+k.day.slice(5, 7)) + '.' + (+k.day.slice(8, 10)) + ' ') + hhmm(r.ts)));
@@ -632,8 +633,8 @@
     flag.hidden = !(d.site === 'oyoga-test' || d.access === 'preview');
     flag.textContent = d.site === 'oyoga-test' ? '시험 기록만 보는 중' : '미리보기 · Vercel 로그인으로 잠겨 있어요';
     $('dkLock').hidden = d.access !== 'key';
-    $('dkSince').textContent = d.first ? '기록 시작 ' + dayLabel(d.first) + ' · 한국 시각 기준 · 1분마다 새로 불러와요' : '아직 쌓인 기록이 없어요';
-    // 처음 열 때와 기간을 바꿀 때만 그림이 자라 오른다. 1분마다 새로 부를 때는 조용히 바꾼다.
+    $('dkSince').textContent = d.first ? '기록 시작 ' + dayLabel(d.first) + ' · 한국 시각 기준 · 보고 있을 때 5분마다 새로 불러와요' : '아직 쌓인 기록이 없어요';
+    // 처음 열 때와 기간을 바꿀 때만 그림이 자라 오른다. 저절로 새로 부를 때는 조용히 바꾼다.
     document.body.classList.toggle('dk-anim', !!state.anim && !REDUCE);
     mast(d); kpis(d); timeChart(d); channels(d); actions(d); pages(d); sections(d); heat(d); who(d); recent(d);
     if (state.anim) {
@@ -733,8 +734,16 @@
     clearTimeout(rt);
     rt = setTimeout(function () { if (state.data && document.documentElement.clientWidth !== state.width) { state.width = document.documentElement.clientWidth; timeChart(state.data); heat(state.data); } }, 160);
   });
-  setInterval(function () { if (document.visibilityState === 'visible' && state.data && !state.busy) load(); }, REFRESH_MS);
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && state.data && !state.busy && Date.now() - state.lastOk > REFRESH_MS) load(); });
+  var lastSeen = Date.now();
+  ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, function () { lastSeen = Date.now(); }, { passive: true }); });
+  setInterval(function () {
+    if (document.visibilityState === 'visible' && state.data && !state.busy && Date.now() - lastSeen < IDLE_MS) load();
+  }, REFRESH_MS);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState !== 'visible') return;
+    lastSeen = Date.now();
+    if (state.data && !state.busy && Date.now() - state.lastOk > REFRESH_MS) load();
+  });
   // 굴리면 말풍선은 숨긴다. 키보드로 고른 그림이면 멈춘 뒤 다시 띄운다.
   var st = 0;
   window.addEventListener('scroll', function () {
