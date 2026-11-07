@@ -1,10 +1,9 @@
-/* 오요가 분석
+/* 오요가 분석 — 바깥 도구(GA4·네이버·Clarity)
    아래 CONFIG 에 측정 ID 를 넣으면 바로 동작한다. 비어 있으면 아무것도 불러오지
    않고 아무것도 보내지 않는다(동작하지 않는 자리표시자를 라이브에 두지 않기 위해).
 
-   전환 이벤트: 링크를 누르면 이벤트를 보낸다. 이름은 data-track 속성이 있으면 그것을,
-   없으면 링크 주소로 추론한다. 그래서 Webflow 가 만든 기존 버튼에 속성을 일일이
-   달지 않아도 사이트의 모든 상담·예약·일정 버튼이 잡힌다. */
+   전환 이벤트: 상담·예약·일정 같은 링크 누름은 js/oy.js(직접 만든 방문 기록)가 알아내
+   'oy:track' 이벤트로 알려 준다. 여기서는 그것을 GA4·Clarity 로 넘기기만 한다. */
 (function () {
   'use strict';
 
@@ -45,44 +44,10 @@
     loadScript('https://www.clarity.ms/tag/' + encodeURIComponent(CONFIG.CLARITY_ID));
   }
 
-  /* 링크 주소 → 전환 이벤트 이름. 위에서부터 먼저 맞는 것을 쓴다 */
-  var RULES = [
-    [/pf\.kakao\.com/, 'kakao_consult'],
-    [/booking\.naver\.com\/.*items\/5238615/, 'trial_booking'],   // 요가 1회 체험권
-    [/booking\.naver\.com/, 'booking'],
-    [/blog\.naver\.com\/.*categoryNo=10\b/, 'schedule'],          // 요가 일정
-    [/blog\.naver\.com\/.*(categoryNo=24\b|logNo=224351981535)/, 'ryt200'],
-    [/blog\.naver\.com\/.*categoryNo=11\b/, 'teacher_blog'],      // 강사 소개 글
-    [/blog\.naver\.com/, 'blog'],
-    [/instagram\.com/, 'instagram'],
-    [/map\.naver\.com/, 'map_open'],
-    [/^tel:/, 'call']
-  ];
-
-  function eventName(a) {
-    var explicit = a.getAttribute('data-track');
-    if (explicit) return explicit;
-    var href = a.getAttribute('href') || '';
-    for (var i = 0; i < RULES.length; i++) {
-      if (RULES[i][0].test(href)) return RULES[i][1];
-    }
-    return null;
-  }
-
-  // 캡처 단계에서 듣는다 — 새 탭으로 열리거나 페이지를 떠나기 전에 먼저 기록
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href]');
-    if (!a) return;
-    var name = eventName(a);
-    if (!name) return;
-    var params = {
-      link_url: a.href,
-      link_text: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60),
-      page_path: location.pathname
-    };
-    if (window.gtag) window.gtag('event', name, params);
-    if (window.clarity) window.clarity('event', name);
-    // 디버그: 주소창에 ?debug_analytics 를 붙이면 콘솔에 이벤트가 찍힌다
-    if (/[?&]debug_analytics\b/.test(location.search)) console.info('[analytics]', name, params);
-  }, true);
+  // 전환 이벤트 — js/oy.js 가 알려 준다(?debug_analytics 를 붙이면 그쪽에서 콘솔에 찍는다)
+  document.addEventListener('oy:track', function (e) {
+    var d = e.detail || {};
+    if (window.gtag) window.gtag('event', d.name, d.params);
+    if (window.clarity) window.clarity('event', d.name);
+  });
 })();

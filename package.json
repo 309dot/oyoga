@@ -1,0 +1,9 @@
+{
+  "name": "oyoga",
+  "private": true,
+  "description": "오요가 사이트. 정적 페이지 + 방문 기록 받는 곳(api/oy.js) 하나",
+  "type": "module",
+  "dependencies": {
+    "postgres": "^3.4.7"
+  }
+}
