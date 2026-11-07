@@ -160,29 +160,30 @@ function header(req, name) {
   return Array.isArray(v) ? v[0] : v || '';
 }
 
+// 돌려주는 값은 응답 머리글 X-Oy 로 나간다: stored | nodb | origin | size | invalid | bot
 async function record(req) {
-  if (!sql) return;
+  if (!sql) return 'nodb';
   const host = header(req, 'x-forwarded-host') || header(req, 'host');
   const hostname = host.split(':')[0].toLowerCase();
   const origin = header(req, 'origin');
   if (origin) {
     let oh = '';
-    try { oh = new URL(origin).hostname.toLowerCase(); } catch { return; }
-    if (oh !== hostname) return; // 다른 사이트에서 보낸 기록은 받지 않는다
+    try { oh = new URL(origin).hostname.toLowerCase(); } catch { return 'origin'; }
+    if (oh !== hostname) return 'origin'; // 다른 사이트에서 보낸 기록은 받지 않는다
   }
 
   let b = req.body;
   if (typeof b === 'string') {
-    if (b.length > 4000) return;
-    b = JSON.parse(b);
+    if (b.length > 4000) return 'size';
+    try { b = JSON.parse(b); } catch { return 'invalid'; }
   }
-  if (!b || typeof b !== 'object') return;
+  if (!b || typeof b !== 'object') return 'invalid';
 
   const ua = header(req, 'user-agent').slice(0, 400);
-  if (!ua || BOT.test(ua)) return;
+  if (!ua || BOT.test(ua)) return 'bot';
   const vid = typeof b.v === 'string' && /^[\w-]{8,40}$/.test(b.v) ? b.v : null;
   const path = normPath(b.p);
-  if (!vid || !path) return;
+  if (!vid || !path) return 'invalid';
 
   const site = LIVE_HOST.test(hostname) && !b.test ? SITE : SITE + '-test';
   await ensureSchema();
@@ -201,13 +202,16 @@ async function record(req) {
     const u = b.u && typeof b.u === 'object' ? b.u : {};
     const refHost = refHostOf(b.r);
     const utmSource = str(u.source, 60);
+    const channel = channelOf(refHost, utmSource, browser, hostname);
     await sql`
       insert into pageviews (vid, site, day, visitor, path, ref_host, channel, utm_source, utm_medium, utm_campaign,
                              device, os, browser, vw, country, region, city)
-      values (${vid}, ${site}, ${day}, ${visitor}, ${path}, ${refHost}, ${channelOf(refHost, utmSource, browser, hostname)},
+      values (${vid}, ${site}, ${day}, ${visitor}, ${path}, ${refHost}, ${channel},
               ${utmSource}, ${str(u.medium, 60)}, ${str(u.campaign, 60)},
               ${device}, ${os}, ${browser}, ${int(b.w, 0, 10000)}, ${country}, ${region}, ${city})
       on conflict (vid) do nothing`;
+    console.log(`[oy] ${site} view ${path} ${channel} ${device}`); // 한 줄 기록 — IP·방문자 표시는 남기지 않는다
+    return 'stored';
   } else if (b.t === 'leave') {
     const sections = Array.isArray(b.sec) ? b.sec.slice(0, 40).map((s) => str(s, 60)).filter(Boolean) : [];
     // 같은 페이지에서 여러 번 올 수 있다(탭을 오갈 때). 큰 값만 남긴다
@@ -221,13 +225,18 @@ async function record(req) {
         scroll_pct = greatest(coalesce(pageviews.scroll_pct, 0), excluded.scroll_pct),
         sections   = array(select distinct unnest(coalesce(pageviews.sections, '{}') || excluded.sections)),
         left_at    = excluded.left_at`;
+    console.log(`[oy] ${site} leave ${path} ${int(b.ms, 0, 1800000)}ms ${int(b.s, 0, 100)}%`);
+    return 'stored';
   } else if (b.t === 'click') {
     const name = typeof b.n === 'string' && /^[a-z0-9_-]{1,40}$/.test(b.n) ? b.n : null;
-    if (!name) return;
+    if (!name) return 'invalid';
     await sql`
       insert into events (site, day, visitor, vid, path, name, target, label, section)
       values (${site}, ${day}, ${visitor}, ${vid}, ${path}, ${name}, ${str(b.to, 300)}, ${str(b.l, 80)}, ${str(b.sec, 60)})`;
+    console.log(`[oy] ${site} click ${path} ${name}`);
+    return 'stored';
   }
+  return 'invalid';
 }
 
 export default async function handler(req, res) {
@@ -237,10 +246,12 @@ export default async function handler(req, res) {
     res.status(405).end();
     return;
   }
+  let result = 'error';
   try {
-    await record(req);
+    result = await record(req);
   } catch (err) {
-    console.error('[oy]', err && err.message);
+    console.error('[oy] error', err && err.message);
   }
+  res.setHeader('X-Oy', result); // 시험할 때 저장됐는지 보는 용도. 비밀은 담지 않는다
   res.status(204).end();
 }
