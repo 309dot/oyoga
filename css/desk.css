@@ -204,6 +204,9 @@
 .dk-more li span:last-child { font-variant-numeric: tabular-nums; color: var(--t1); }
 .dk-empty { padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--t3); font-size: 15px; }
 .dk-empty b { display: block; font-family: var(--kr); font-weight: 300; font-size: clamp(22px, 2vw, 28px); letter-spacing: -.02em; color: var(--t1); margin-bottom: 4px; }
+.dk-empty.sm { padding: 16px 0; border-top: 0; }
+.dk-empty.sm b { font-family: var(--sans); font-weight: 400; font-size: 15px; letter-spacing: 0; color: var(--t3); margin: 0; }
+.dk-recent li.empty { display: block; padding: 0; border: 0; }
 
 /* 다음으로 간 곳 */
 .dk-flows .dk-row .n { display: flex; align-items: baseline; gap: 10px; }

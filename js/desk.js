@@ -177,8 +177,8 @@
     });
     return ol;
   }
-  function empty(box, title, body) {
-    var e = el('div', 'dk-empty');
+  function empty(box, title, body, small) {
+    var e = el('div', 'dk-empty' + (small ? ' sm' : ''));
     e.appendChild(el('b', null, title));
     if (body) e.appendChild(document.createTextNode(body));
     box.appendChild(e);
@@ -419,7 +419,11 @@
     else box.appendChild(el('span', null, '기록이 더 쌓이면 앞 기간과 견줘요'));
 
     var lede = $('dkLede'); clear(lede);
-    if (!t.visits) { lede.textContent = n === 1 ? '오늘은 아직 다녀간 기록이 없어요. 누군가 들어오면 바로 여기에 적혀요.' : '이 기간에는 아직 다녀간 기록이 없어요.'; return; }
+    if (!t.visits) {
+      lede.textContent = !d.first ? '아직 다녀간 기록이 없어요. 누군가 들어오면 1분 안에 여기에 나타나요.'
+        : n === 1 ? '오늘은 아직 다녀간 기록이 없어요. 누군가 들어오면 1분 안에 여기에 나타나요.' : '이 기간에는 다녀간 기록이 없어요.';
+      return;
+    }
     var top = (d.channels || [])[0];
     if (top && top.key === 'direct') append(lede, el('b', null, '주소로 바로 들어온 방문'), '이 가장 많았어요. ');
     else if (top) append(lede, el('b', null, chLabel(top.key)), '에서 가장 많이 왔어요. ');
@@ -530,7 +534,7 @@
     var box = $('boxPages'), fl = $('boxFlows'); clear(box); clear(fl);
     var list = d.pages || [], total = sum(list, 'views');
     $('p4a').textContent = total ? '페이지 뷰 ' + fmt(total) + ' · 머문 시간과 스크롤은 평균' : '';
-    if (!list.length) { empty(box, '아직 본 페이지가 없어요', ''); return; }
+    if (!list.length) { empty(box, '아직 본 페이지가 없어요', '누군가 들어오면 어느 페이지를 얼마나 오래, 어디까지 봤는지 여기에 적혀요.'); return; }
     box.appendChild(rows(list.map(function (p) {
       return { label: pageLabel(p.path), sub: '머문 시간 ' + dur(p.engagedMs) + ' · 스크롤 ' + (p.scroll == null ? '–' : p.scroll + '%'), value: p.views, share: pct(p.views, total),
         tip: function () { return [pageLabel(p.path), [[fmt(p.views), '페이지 뷰'], [fmt(p.visits), '방문'], [dur(p.engagedMs), '머문 시간 평균'], [p.scroll == null ? '–' : p.scroll + '%', '스크롤 평균']]]; } };
@@ -567,7 +571,7 @@
     var fig = $('figHeat');
     $('p6a').textContent = '요일과 시간마다 · 한국 시각';
     if (d.days === 1) { clear(fig); empty(fig, '7일 이상에서 보여요', '하루치로는 요일과 시간의 무늬가 보이지 않아요. 위에서 7일이나 30일을 골라 보세요.'); return; }
-    if (!(d.hours || []).length) { clear(fig); empty(fig, '아직 기록이 없어요', ''); return; }
+    if (!(d.hours || []).length) { clear(fig); empty(fig, '아직 기록이 없어요', '방문이 쌓이면 무슨 요일, 몇 시에 많이 들어오는지 여기에 보여요.'); return; }
     heatmap(fig, d);
   }
 
@@ -575,11 +579,11 @@
     var tv = d.totals.visits;
     [['boxDevices', d.devices, function (k) { return DEVICE[k] || k; }], ['boxBrowsers', d.browsers, function (k) { return BROWSER[k] || k; }]].forEach(function (b) {
       var box = $(b[0]); clear(box);
-      if (!(b[1] || []).length) return empty(box, '아직 없어요', '');
+      if (!(b[1] || []).length) return empty(box, '아직 없어요', '', true);
       box.appendChild(rows(b[1].map(function (x) { return { label: b[2](x.key), value: x.visits, share: pct(x.visits, tv) }; }), { small: true }));
     });
     var rb = $('boxRegions'); clear(rb);
-    if (!(d.regions || []).length) return empty(rb, '아직 없어요', '');
+    if (!(d.regions || []).length) return empty(rb, '아직 없어요', '', true);
     rb.appendChild(rows(d.regions.map(function (r) {
       var name = r.country === 'KR' ? (KR_REGION[r.region] || '한국 (지역 모름)') : r.country ? countryName(r.country) : '모름';
       return { label: name, value: r.visits, share: pct(r.visits, tv) };
@@ -593,7 +597,7 @@
     var box = $('boxRecent'); clear(box);
     var list = d.recent || [];
     $('p8a').textContent = list.length ? '가장 최근 페이지 뷰 ' + list.length + '개' : '';
-    if (!list.length) { var li0 = el('li'); empty(li0, '아직 없어요', ''); box.appendChild(li0); return; }
+    if (!list.length) { var li0 = el('li', 'empty'); empty(li0, '아직 없어요', '누군가 들어오면 1분 안에 여기에 한 줄씩 적혀요. 시각, 본 페이지, 들어온 길, 머문 시간이 남아요.'); box.appendChild(li0); return; }
     list.forEach(function (r) {
       var li = el('li'), k = kst(r.ts), today = k.day === d.today;
       li.appendChild(el('span', 'tm', (today ? '' : (+k.day.slice(5, 7)) + '.' + (+k.day.slice(8, 10)) + ' ') + hhmm(r.ts)));
