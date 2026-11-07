@@ -15,7 +15,7 @@ const SITE = 'oyoga';
 const TEST_SITE = 'oyoga-test';
 const RANGES = new Set([1, 7, 30, 90]);
 const DB_URL = process.env.DATABASE_URL || process.env.POSTGRES_URL || '';
-const KEY = process.env.OY_DESK_KEY || '';
+const KEY = (process.env.OY_DESK_KEY || '').trim();
 const OPEN_ENV = process.env.VERCEL_ENV === 'preview' || process.env.VERCEL_ENV === 'development';
 
 const sql = DB_URL ? postgres(DB_URL, { prepare: false, max: 1, idle_timeout: 20, connect_timeout: 10 }) : null;
@@ -26,9 +26,18 @@ function header(req, name) {
 }
 
 function sameKey(given) {
-  const a = crypto.createHash('sha256').update(String(given)).digest();
-  const b = crypto.createHash('sha256').update(KEY).digest();
+  const a = crypto.createHash('sha256').update(String(given).normalize('NFC')).digest();
+  const b = crypto.createHash('sha256').update(KEY.normalize('NFC')).digest();
   return crypto.timingSafeEqual(a, b);
+}
+
+// 브라우저는 머리글에 한글을 실을 수 없어서 화면은 열쇠를 encodeURIComponent 로 감싸 보낸다.
+// 감싸지 않고 온 값(예전 화면, curl)도 그대로 받는다.
+function keyMatches(given) {
+  if (sameKey(given)) return true;
+  let plain;
+  try { plain = decodeURIComponent(given); } catch { return false; }
+  return plain !== given && sameKey(plain.trim());
 }
 
 async function access(req, site, writing) {
@@ -36,7 +45,7 @@ async function access(req, site, writing) {
   if (OPEN_ENV) return { ok: true, mode: 'preview' };
   if (!KEY) return { ok: false, configured: false };
   const m = /^Bearer\s+(.+)$/i.exec(header(req, 'authorization'));
-  if (m && sameKey(m[1].trim())) return { ok: true, mode: 'key' };
+  if (m && keyMatches(m[1].trim())) return { ok: true, mode: 'key' };
   await new Promise((r) => setTimeout(r, 400)); // 열쇠를 마구 넣어 보는 걸 늦춘다
   return { ok: false, configured: true };
 }

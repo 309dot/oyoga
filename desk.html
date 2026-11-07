@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/desk.css">
 <link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/webclip.png">
+<meta name="apple-mobile-web-app-title" content="방문 노트">
 </head>
 <body class="dk">
 <div class="grain" aria-hidden="true"></div>
@@ -35,6 +37,7 @@
     <i class="mark" aria-hidden="true"></i>
     <h1 id="gateTitle">방문 노트</h1>
     <p id="dkGateMsg">오요가 방문 기록을 보려면 열쇠를 넣어 주세요.</p>
+    <input class="dk-user" id="dkUser" name="username" type="text" autocomplete="username" value="오요가 방문 노트" tabindex="-1" aria-hidden="true">
     <label class="sr" for="dkKey">열쇠</label>
     <input id="dkKey" name="password" type="password" autocomplete="current-password" placeholder="열쇠" required>
     <button class="pill pill-ink" type="submit">열기</button>

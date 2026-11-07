@@ -62,6 +62,7 @@
 .dk-gate-in p { color: var(--t3); font-size: 15px; text-wrap: balance; }
 .dk-gate-in input { width: 100%; min-height: 52px; padding: 0 20px; border: 1px solid var(--axis); border-radius: 999px; background: transparent; color: var(--t1); font: inherit; font-size: 16px; text-align: center; letter-spacing: .08em; }
 .dk-gate-in input:focus { outline: none; border-color: var(--t1); }
+.dk-gate-in .dk-user { position: absolute; width: 1px; height: 1px; min-height: 0; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; } /* 암호 관리자에 저장될 이름 — 눈에는 안 보인다 */
 .dk-gate-in .pill { width: 100%; min-height: 52px; }
 .dk-gate-err { min-height: 1.7em; color: var(--accent) !important; }
 .dk-gate-in.off input, .dk-gate-in.off button, .dk-gate-in.off .dk-gate-err { display: none; }

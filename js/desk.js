@@ -644,13 +644,23 @@
     }
   }
 
+  // 맞는 열쇠를 손으로 넣었을 때 브라우저 암호 관리자에 저장하라고 알린다(크롬·엣지·안드로이드).
+  // 사파리는 아이디·암호 칸이 있는 폼 제출을 보고 스스로 묻는다.
+  function remember(k) {
+    try {
+      if (!window.PasswordCredential || !navigator.credentials || !navigator.credentials.store) return;
+      var id = $('dkUser').value || '오요가 방문 노트';
+      navigator.credentials.store(new window.PasswordCredential({ id: id, password: k, name: id })).catch(function () { /* 저장을 거절해도 그만 */ });
+    } catch (e) { /* */ }
+  }
+
   var seq = 0;
   function load() {
     var my = ++seq; // 늦게 온 앞 요청은 버린다 (기간을 빨리 바꿔 눌러도 마지막 것만)
     state.busy = true;
     document.body.classList.add('dk-busy');
     var headers = {};
-    if (state.key) headers.Authorization = 'Bearer ' + state.key;
+    if (state.key) headers.Authorization = 'Bearer ' + encodeURIComponent(state.key); // 한글 열쇠도 머리글에 실리게
     fetch(API + '?range=' + state.range + (TEST ? '&site=test' : ''), { headers: headers, cache: 'no-store', credentials: 'same-origin' })
       .then(function (r) {
         if (r.status === 401) return r.json().catch(function () { return {}; }).then(function (j) { var e = new Error('locked'); e.info = j; throw e; });
@@ -660,7 +670,7 @@
       .then(function (d) {
         if (my !== seq) return;
         state.lastOk = Date.now();
-        if (state.trying) { state.trying = false; $('dkKey').value = ''; }
+        if (state.trying) { state.trying = false; remember(state.key); $('dkKey').value = ''; }
         show('main');
         render(d);
       })
@@ -705,6 +715,13 @@
   }
   if (!keyFromHash()) state.key = store(true, STORE);
   window.addEventListener('hashchange', function () { if (keyFromHash()) { state.anim = true; load(); } });
+  // 홈 화면 앱으로 열었을 때 오요가 첫 화면 링크는 사파리로 연다 (앱 안에 갇히지 않게)
+  try {
+    if (navigator.standalone || matchMedia('(display-mode: standalone)').matches) {
+      var brand = document.querySelector('.dk-brand');
+      brand.target = '_blank'; brand.rel = 'noopener';
+    }
+  } catch (e) { /* */ }
   try { var saved = +sessionStorage.getItem('oy-desk-range'); if (RANGES.indexOf(saved) >= 0) state.range = saved; } catch (e) { /* */ }
 
   Array.prototype.forEach.call(document.querySelectorAll('.dk-range button'), function (b) {
