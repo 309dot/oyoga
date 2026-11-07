@@ -10,5 +10,26 @@
     { "source": "/detail_programs.html", "destination": "/academy.html", "statusCode": 301 },
     { "source": "/detail_team-profile.html", "destination": "/teachers.html", "statusCode": 301 },
     { "source": "/team-profiles/:slug*", "destination": "/teachers.html", "statusCode": 301 }
+  ],
+  "rewrites": [
+    { "source": "/desk", "destination": "/desk.html" }
+  ],
+  "headers": [
+    {
+      "source": "/desk",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Referrer-Policy", "value": "same-origin" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    },
+    {
+      "source": "/desk.html",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Referrer-Policy", "value": "same-origin" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
   ]
 }

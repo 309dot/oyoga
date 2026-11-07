@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>방문 노트 — 오요가</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="same-origin">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/desk.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body class="dk">
+<div class="grain" aria-hidden="true"></div>
+
+<header class="dk-top">
+  <a class="dk-brand" href="/" aria-label="오요가 첫 화면으로"><i class="mark" aria-hidden="true"></i><span>방문 노트</span></a>
+  <div class="dk-status">
+    <span class="dk-live" aria-hidden="true"></span>
+    <span id="dkStamp" aria-live="polite">불러오는 중</span>
+    <button class="dk-icon" id="dkRefresh" type="button" aria-label="지금 다시 불러오기">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4.2h-4.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="dk-wait" id="dkWait"><i class="mark" aria-hidden="true"></i><p>기록을 펼치는 중</p></div>
+
+<section class="dk-gate" id="dkGate" hidden aria-labelledby="gateTitle">
+  <form class="dk-gate-in" id="dkGateForm" autocomplete="on">
+    <i class="mark" aria-hidden="true"></i>
+    <h1 id="gateTitle">방문 노트</h1>
+    <p id="dkGateMsg">오요가 방문 기록을 보려면 열쇠를 넣어 주세요.</p>
+    <label class="sr" for="dkKey">열쇠</label>
+    <input id="dkKey" name="password" type="password" autocomplete="current-password" placeholder="열쇠" required>
+    <button class="pill pill-ink" type="submit">열기</button>
+    <p class="dk-gate-err" id="dkGateErr" role="alert"></p>
+  </form>
+</section>
+
+<main class="dk-main" id="dkMain" hidden>
+  <div class="dk-bar">
+    <div class="dk-range" role="group" aria-label="기간">
+      <button type="button" data-range="1" aria-pressed="false">오늘</button>
+      <button type="button" data-range="7" aria-pressed="true">7일</button>
+      <button type="button" data-range="30" aria-pressed="false">30일</button>
+      <button type="button" data-range="90" aria-pressed="false">90일</button>
+    </div>
+    <p class="dk-flag" id="dkFlag" hidden></p>
+  </div>
+
+  <section class="dk-mast" aria-labelledby="dkHeroLine">
+    <p class="meta dk-period" id="dkPeriod"></p>
+    <div class="dk-mast-c">
+      <p class="dk-intro" id="dkIntro"></p>
+      <h1 class="dk-hero" id="dkHeroLine"><span class="dk-hero-n" id="dkVisits">0</span><span class="dk-hero-u">번 다녀갔어요</span></h1>
+      <p class="dk-lede" id="dkLede"></p>
+    </div>
+    <p class="dk-delta" id="dkDelta"></p>
+  </section>
+
+  <dl class="dk-kpis" id="dkKpis"></dl>
+
+  <section class="dk-panel" aria-labelledby="p1">
+    <header class="dk-ph"><span class="meta">01</span><h2 id="p1">날마다</h2><p id="p1a"></p></header>
+    <figure class="dk-fig" id="figTime"></figure>
+  </section>
+
+  <div class="dk-pair">
+    <section class="dk-panel" aria-labelledby="p2">
+      <header class="dk-ph"><span class="meta">02</span><h2 id="p2">어디서 왔나</h2><p id="p2a"></p></header>
+      <div id="boxChannels"></div>
+    </section>
+    <section class="dk-panel" aria-labelledby="p3">
+      <header class="dk-ph"><span class="meta">03</span><h2 id="p3">무엇을 눌렀나</h2><p id="p3a"></p></header>
+      <div id="boxActions"></div>
+    </section>
+  </div>
+
+  <section class="dk-panel" aria-labelledby="p4">
+    <header class="dk-ph"><span class="meta">04</span><h2 id="p4">무엇을 봤나</h2><p id="p4a"></p></header>
+    <div class="dk-split">
+      <div id="boxPages"></div>
+      <div id="boxFlows"></div>
+    </div>
+  </section>
+
+  <div class="dk-pair">
+    <section class="dk-panel" aria-labelledby="p5">
+      <header class="dk-ph"><span class="meta">05</span><h2 id="p5">홈에서 어디까지</h2><p id="p5a"></p></header>
+      <div id="boxSections"></div>
+    </section>
+    <section class="dk-panel" aria-labelledby="p6">
+      <header class="dk-ph"><span class="meta">06</span><h2 id="p6">언제</h2><p id="p6a"></p></header>
+      <figure class="dk-fig" id="figHeat"></figure>
+    </section>
+  </div>
+
+  <section class="dk-panel" aria-labelledby="p7">
+    <header class="dk-ph"><span class="meta">07</span><h2 id="p7">어떻게, 어디에서</h2><p id="p7a"></p></header>
+    <div class="dk-three">
+      <div><h3 class="dk-h3">기기</h3><div id="boxDevices"></div></div>
+      <div><h3 class="dk-h3">브라우저와 앱</h3><div id="boxBrowsers"></div></div>
+      <div><h3 class="dk-h3">지역</h3><div id="boxRegions"></div></div>
+    </div>
+  </section>
+
+  <section class="dk-panel" aria-labelledby="p8">
+    <header class="dk-ph"><span class="meta">08</span><h2 id="p8">방금</h2><p id="p8a"></p></header>
+    <ol class="dk-recent" id="boxRecent"></ol>
+  </section>
+
+  <footer class="dk-foot">
+    <dl class="dk-notes">
+      <div><dt>방문</dt><dd>쿠키 없이 세기 때문에 같은 사람도 날이 바뀌면 새 방문이 돼요. 하루 안에서는 몇 번을 들어와도 한 번이에요.</dd></div>
+      <div><dt>빠지는 것</dt><dd>검색 로봇, 그리고 <span class="dk-code">?notrack=1</span>을 붙여 한 번 연 기기(원장님·선생님 기기)는 세지 않아요.</dd></div>
+      <div><dt>머문 시간</dt><dd>화면을 실제로 보고 있던 시간만 더해요. 다른 앱으로 넘어간 동안은 빠져요.</dd></div>
+      <div><dt>견주기</dt><dd>바로 앞의 같은 길이 기간과 견줘요. 오늘은 어제 이맘때까지와 견줘요.</dd></div>
+    </dl>
+    <p class="dk-foot-line"><span id="dkSince"></span><button type="button" class="dk-lock" id="dkLock" hidden>이 기기에서 잠그기</button></p>
+  </footer>
+</main>
+
+<div class="dk-tip" id="dkTip" role="tooltip" hidden></div>
+
+<script src="js/data.js" defer></script>
+<script src="js/desk.js" defer></script>
+</body>
+</html>
